@@ -270,6 +270,9 @@
         .checklist-item.completed {
             opacity: 0.6;
             text-decoration: line-through;
+            /*small change for the completed checklist item*/
+            color: #28a745; 
+            background-color: #e0f8e9;
         }
 
         .grid {
@@ -278,6 +281,33 @@
             gap: 20px;
             margin-top: 20px;
         }
+
+        /*CHANGE START*/
+        /*CHANGE: set reset-container as flex*/
+        .reset-container{
+            display:flex;
+            justify-content: center;
+        }
+
+        /*Change: CSS styling to reset button*/
+        .reset-button{
+            display: block;
+            margin-top: 10px auto 0 auto;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s ease-in-out;
+            
+        }
+        .reset-button:hover {
+            background-color: #d32f2f;
+        }
+         
+        /*CHANGE OVER*/
 
         .card {
             background: rgba(255, 255, 255, 0.9);
@@ -672,14 +702,20 @@
                 <div class="card">
                     <h3><i class="fas fa-clipboard-list"></i> Pre-Trip (2-4 weeks before)</h3>
                     <div class="checklist" id="preTrip"></div>
+                    <!--change: Added a reset button-->
+                    <div class="reset-container"><button class="reset-button" data-target="preTrip">Reset</button></div>
                 </div>
                 <div class="card">
                     <h3><i class="fas fa-calendar-week"></i> 1 Week Before</h3>
                     <div class="checklist" id="oneWeek"></div>
+                    <!--change: Added a reset button-->
+                    <div class="reset-container"><button class="reset-button" data-target="oneWeek">Reset</button></div>
                 </div>
                 <div class="card">
                     <h3><i class="fas fa-plane-departure"></i> Day Before</h3>
                     <div class="checklist" id="dayBefore"></div>
+                    <!--change: Added a reset button-->
+                    <div class="reset-container"><button class="reset-button" data-target="dayBefore">Reset</button></div>
                 </div>
             </div>
             <div style="margin-top: 20px;">
@@ -1066,6 +1102,25 @@
             });
         }
 
+        //CHANGE START
+        //CHANGE: add reset functionality to reset button
+        document.querySelectorAll('.reset-button').forEach((button) =>{
+            button.addEventListener("click", function(){
+                const targetId = this.getAttribute('data-target'); //the data-target value of the button clicked
+                const checklist = document.getElementById(targetId); //the id of the checklist whose reset-button was clicked
+                const checkboxes = checklist.querySelectorAll('input[type="checkbox"]');
+
+                //For removing the completed class from each of those checkboxes
+                checkboxes.forEach((checkbox)=>{
+                    checkbox.checked = false;
+                    checkbox.closest('.checklist-item')?.classList.remove('completed');
+                });
+
+                updateProgress();
+            });
+        });
+        //CHANGE OVER
+        
         // Packing functions
         function generatePackingList() {
             const tripType = document.getElementById('tripType').value;
