@@ -13,12 +13,12 @@
 <body>
     <div class="container">
         <div class="header">
-             <button class="theme-toggle" id="themeToggle">
+            <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
             </button>
-             <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
-        <i class="fas fa-bars"></i>
-    </button>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+                <i class="fas fa-bars"></i>
+            </button>
             <h1><i class="fas fa-globe-americas"></i> Smart Travel Planner</h1>
             <p>Plan your perfect trip with intelligent routing and comprehensive preparation tools</p>
         </div>
@@ -34,7 +34,6 @@
             </div>
         </div>
 
-        <!-- Itinerary Tab -->
         <div id="itinerary" class="tab-content active">
             <h2><i class="fas fa-calendar-alt"></i> Travel Itinerary</h2>
 
@@ -71,16 +70,25 @@
             <div class="form-group">
                 <label><i class="fas fa-plus-circle"></i> Add Activity</label>
                 <input type="text" id="activityName" placeholder="Activity name">
-                <input type="time" id="activityTime" style="margin-top: 10px;">
-                <input type="text" id="activityLocation" placeholder="Location" style="margin-top: 10px;">
-                <input type="number" id="activityCost" placeholder="Estimated cost (₹)" style="margin-top: 10px;">
-                <button class="btn" onclick="addItineraryItem()" style="margin-top: 10px;"><i class="fas fa-plus"></i>Add Activity</button>
-            </div>
+                
+                <div class="activity-time-grid">
+                    <div class="time-input-group">
+                        <label for="activityStartTime">Start Time</label>
+                        <input type="time" id="activityStartTime">
+                    </div>
+                    <div class="time-input-group">
+                        <label for="activityEndTime">End Time</label>
+                        <input type="time" id="activityEndTime">
+                    </div>
+                </div>
 
+                <input type="text" id="activityLocation" placeholder="Location">
+                <input type="number" id="activityCost" placeholder="Estimated cost (₹)">
+                <button class="btn" onclick="addItineraryItem()"><i class="fas fa-plus"></i>Add Activity</button>
+            </div>
             <div id="itineraryList"></div>
         </div>
 
-        <!-- Smart Routes Tab -->
         <div id="routes" class="tab-content">
             <h2><i class="fas fa-route"></i> Smart Route Planning</h2>
             <div class="grid">
@@ -98,7 +106,6 @@
             <div id="routeResults"></div>
         </div>
 
-        <!-- Checklist Tab -->
         <div id="checklist" class="tab-content">
             <h2><i class="fas fa-check-circle"></i> Trip Preparation Checklist</h2>
             <div class="grid">
@@ -124,7 +131,6 @@
             </div>
         </div>
 
-        <!-- Packing Tab -->
         <div id="packing" class="tab-content">
             <h2><i class="fas fa-suitcase"></i> Smart Packing Assistant</h2>
             <div class="form-group">
@@ -159,14 +165,12 @@
             <div id="packingList"></div>
         </div>
 
-        <!-- Documents Tab -->
         <div id="documents" class="tab-content">
             <h2><i class="fas fa-file-alt"></i> Travel Document Tracker</h2>
             <button class="btn" onclick="showAddDocumentModal()"><i class="fas fa-plus"></i> Add Document</button>
             <div class="document-tracker" id="documentList"></div>
         </div>
 
-        <!-- Currency Tab -->
         <div id="currency" class="tab-content">
             <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
             <div class="currency-converter">
@@ -210,7 +214,6 @@
         </div>
     </div>
 
-    <!-- Add Document Modal -->
     <div id="documentModal" class="modal">
         <div class="modal-content">
             <h3><i class="fas fa-file-medical"></i> Add Travel Document</h3>
@@ -242,27 +245,22 @@
 
     <button class="floating-action" onclick="exportItinerary()"><i class="fas fa-file-download"></i></button>
 
-    <div id="notification" class="notification">
+    <div class="notification">
         <i class="fas fa-check-circle"></i>
         <span id="notificationText">Notification message</span>
     </div>
-    <div id="notification" class="notification">
-        <i class="fas fa-check-circle"></i>
-        <span id="notificationText">Notification message</span>
-    </div>
-<script src="script.js"></script>
-
-<footer class="footer">
-    <div class="footer-content">
-        <span>© 2025 WanderWise. Travel smarter.</span>
-        <div class="footer-social">
-            <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:hello@wanderwise.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <span>© 2025 WanderWise. Travel smarter.</span>
+            <div class="footer-social">
+                <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:hello@wanderwise.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
         </div>
-    </div>
-</footer>
-<script src="script.js"></script>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
