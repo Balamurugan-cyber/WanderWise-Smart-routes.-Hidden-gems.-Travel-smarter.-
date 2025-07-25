@@ -565,7 +565,10 @@ document.addEventListener('DOMContentLoaded', function() {
  });
 
 // Initialize a new Lenis instance for smooth scrolling
-const lenis = new Lenis();
+const lenis = new Lenis({
+    lerp: 0.05,
+    smooth: true
+});
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => {
   lenis.raf(time * 1000);
