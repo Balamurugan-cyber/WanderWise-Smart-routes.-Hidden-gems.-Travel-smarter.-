@@ -31,7 +31,31 @@
             
             event.target.classList.add('active');
         }
-
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            // Use the correct selector for your menu:
+            // If your menu has id="mainTabs", use:
+            const mainTabs = document.getElementById('mainTabs');
+            // If your menu has class="tabs", use:
+            // const mainTabs = document.querySelector('.tabs');
+        
+            if (hamburgerBtn && mainTabs) {
+                hamburgerBtn.addEventListener('click', function() {
+                    mainTabs.classList.toggle('open');
+                    this.classList.toggle('active');
+                });
+        
+                // Optional: close menu when a tab is clicked (on mobile)
+                mainTabs.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        if (window.innerWidth <= 800) {
+                            mainTabs.classList.remove('open');
+                            hamburgerBtn.classList.remove('active');
+                        }
+                    });
+                });
+            }
+        });
         // Itinerary functionality
         let activities = [];
         let totalBudget = 0;
@@ -397,7 +421,13 @@
             GBP: 0.0095,
             JPY: 1.70,
             AUD: 0.018,
-            CAD: 0.016
+            CAD: 0.016,
+            CNY: 12.09, 
+            SGD: 67.54, 
+            ZAR: 4.87, 
+            BRL: 15.64, 
+            RUB: 1.09, 
+            KRW: 0.063
         };
         
         function convertCurrency() {
@@ -542,20 +572,304 @@ window.findRoute = function() {
     `;
 };
 
-// Hamburger menu logic
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const mainTabs = document.getElementById('mainTabs');
-    hamburgerBtn.addEventListener('click', function() {
-        mainTabs.classList.toggle('open');
-    });
-
-    // Optional: close menu when a tab is clicked (on mobile)
-    mainTabs.querySelectorAll('.tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            if (window.innerWidth <= 800) {
-                mainTabs.classList.remove('open');
-            }
-        });
-    });
+// Back to Top button logic
+const backToTopBtn = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTopBtn.style.display = 'flex';
+    } else {
+        backToTopBtn.style.display = 'none';
+    }
 });
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Gallery data
+        const galleryData = [
+            {
+                title: "Santorini, Greece",
+                location: "Greece, Europe",
+                image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                description: "Famous for its whitewashed houses with blue domes, breathtaking sunsets, and crystal-clear waters. Santorini is a dream destination for romance and relaxation.",
+                region: "europe",
+                bestTime: "Apr-Oct",
+                rating: 4.9
+            },
+            {
+                title: "Machu Picchu, Peru",
+                location: "Peru, South America",
+                image: "https://images.unsplash.com/photo-1526392060635-9d6019884377?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                description: "This 15th-century Inca citadel is located high in the Andes Mountains. Often referred to as the 'Lost City of the Incas', it's one of the most iconic archaeological sites in the world.",
+                region: "americas",
+                bestTime: "May-Sep",
+                rating: 4.8
+            },
+            {
+                title: "Kyoto, Japan",
+                location: "Japan, Asia",
+                image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                description: "Known for its classical Buddhist temples, gardens, imperial palaces, and traditional wooden houses. Kyoto is especially beautiful during cherry blossom season.",
+                region: "asia",
+                bestTime: "Mar-May, Oct-Nov",
+                rating: 4.9
+            },
+            {
+                title: "Serengeti National Park",
+                location: "Tanzania, Africa",
+                image: "https://picsum.photos/id/169/800/600",
+                description: "Famous for its annual migration of over 1.5 million wildebeest and 250,000 zebras. The park offers one of the most spectacular wildlife experiences on the planet.",
+                region: "africa",
+                bestTime: "Jun-Oct",
+                rating: 4.8
+            },
+            {
+                title: "Great Barrier Reef",
+                location: "Australia, Oceania",
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                description: "The world's largest coral reef system composed of over 2,900 individual reefs and 900 islands. A paradise for divers and marine life enthusiasts.",
+                region: "oceania",
+                bestTime: "Jun-Oct",
+                rating: 4.7
+            },
+            {
+                title: "Venice, Italy",
+                location: "Italy, Europe",
+                image: "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                description: "Built on more than 100 small islands in a lagoon in the Adriatic Sea. Known for its canals, gondolas, and stunning Renaissance architecture.",
+                region: "europe",
+                bestTime: "Apr-Jun, Sep-Oct",
+                rating: 4.7
+            },
+            {
+                title: "Angkor Wat, Cambodia",
+                location: "Cambodia, Asia",
+                image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                description: "The largest religious monument in the world, originally constructed as a Hindu temple. Its intricate carvings and majestic scale are breathtaking.",
+                region: "asia",
+                bestTime: "Nov-Feb",
+                rating: 4.8
+            },
+            {
+                title: "Banff National Park",
+                location: "Canada, North America",
+                image: "https://images.unsplash.com/photo-1500581276021-a4bbcd0050c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                description: "Canada's oldest national park, known for its turquoise glacial lakes, majestic mountains, and abundant wildlife. A paradise for outdoor enthusiasts.",
+                region: "americas",
+                bestTime: "Jun-Aug, Dec-Mar",
+                rating: 4.9
+            },
+            {
+                title: "Bora Bora, French Polynesia",
+                location: "French Polynesia, Oceania",
+                image: "https://picsum.photos/id/104/800/600",
+                description: "Famous for its turquoise lagoon protected by a coral reef and surrounded by sand-fringed motus (islets). The ultimate luxury island getaway.",
+                region: "oceania",
+                bestTime: "May-Oct",
+                rating: 4.9
+            },
+            {
+                title: "Victoria Falls",
+                location: "Zambia/Zimbabwe, Africa",
+                image: "https://picsum.photos/id/121/800/600",
+                description: "One of the largest and most famous waterfalls in the world. Locally known as 'Mosi-oa-Tunya' or 'The Smoke that Thunders'.",
+                region: "africa",
+                bestTime: "Feb-May, Aug-Dec",
+                rating: 4.7
+            },
+            {
+                title: "Grand Canyon",
+                location: "Arizona, USA",
+                image: "https://picsum.photos/id/102/800/600",
+                description: "A steep-sided canyon carved by the Colorado River, it's 277 miles long, up to 18 miles wide and over a mile deep. A geological wonder that leaves visitors in awe.",
+                region: "americas",
+                bestTime: "Mar-May, Sep-Nov",
+                rating: 4.8
+            },
+            {
+                title: "Northern Lights, Iceland",
+                location: "Iceland, Europe",
+                image: "https://images.unsplash.com/photo-1519817914152-22d216bb9170?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                description: "The Aurora Borealis is a natural light display in the Earth's sky, predominantly seen in high-latitude regions. Iceland offers some of the best viewing opportunities.",
+                region: "europe",
+                bestTime: "Sep-Mar",
+                rating: 4.9
+            },
+            {
+                title: "Andaman Islands, India",
+                location: "India, Asia",
+                image: "https://images.unsplash.com/photo-1519817914152-22d216bb9170?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                description: "Turquoise waters, bioluminescent beaches (Havelock Island), coral reefs, and historic Ross Island.",
+                region: "asia",
+                bestTime:"Nov-May",
+                rating: 4.4
+            },
+            {
+                title: "Whitsunday Islands, Australia",
+                location: "India, Asia",
+                image: "https://images.unsplash.com/photo-1519817914152-22d216bb9170?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                description: "Whitehaven Beach’s silica sand, sailing tours, Heart Reef flyovers.Reef sharks, sea turtles.",
+                region: "australia",
+                bestTime: "May-Sep",
+                rating: 4.1
+            },
+            {
+                title: "Maldives",
+                location: "Indian Ocean",
+                image: "https://images.unsplash.com/photo-1590523278191-995cbcda646b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                description: "Paradise of coral atolls with luxury resorts and vibrant marine life.",
+                region: "asia",
+                category: "islands",
+                bestTime: "Nov-Apr",
+                rating: 4.8
+            },
+             {
+                title: "Phi Phi Islands",
+                location: "Thailand",
+                image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                description: "Dramatic limestone cliffs and crystal-clear waters in the Andaman Sea.",
+                region: "asia",
+                category: "islands",
+                bestTime: "Nov-Apr",
+                rating: 4.7
+            },
+            {
+                title: "Aurora Australis",
+                location: "Tasmania, Australia",
+                image: "https://images.unsplash.com/photo-1508973379184-7517410fb0bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+                description: "Southern Lights - nature's spectacular light show in the Tasmanian sky.",
+                region: "australia",
+                category: "nature",
+                bestTime: "May-Aug",
+                rating: 4.9
+            },
+        ];
+
+        // Function to generate gallery cards
+        function generateGalleryCards() {
+            const galleryContainer = document.getElementById('gallery-container');
+            galleryContainer.innerHTML = '';
+            
+            galleryData.forEach((place, index) => {
+                const card = document.createElement('div');
+                card.className = 'gallery-card';
+                card.dataset.region = place.region;
+                card.innerHTML = `
+                    <img src="${place.image}" alt="${place.title}" class="card-image">
+                    <div class="card-overlay">
+                        <h3 class="card-title">${place.title}</h3>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${place.location}</span>
+                        </div>
+                        <p class="card-description">${place.description}</p>
+                        <div class="card-stats">
+                            <div><i class="fas fa-calendar"></i> Best: ${place.bestTime}</div>
+                            <div><i class="fas fa-star"></i> Rating: ${place.rating}</div>
+                        </div>
+                    </div>
+                `;
+                galleryContainer.appendChild(card);
+                
+                // Add scroll animation
+                setTimeout(() => {
+                    observeCard(card);
+                }, 100);
+            });
+        }
+
+        // Intersection Observer for scroll animations
+        function observeCard(card) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        card.classList.add('visible');
+                        observer.unobserve(card);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            observer.observe(card);
+        }
+
+        // Filter gallery by region
+        function filterGallery(region) {
+            const cards = document.querySelectorAll('.gallery-card');
+            cards.forEach(card => {
+                if (region === 'all' || card.dataset.region === region) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Search functionality
+        function searchGallery(query) {
+            const cards = document.querySelectorAll('.gallery-card');
+            const searchTerm = query.toLowerCase();
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const location = card.querySelector('.card-location span').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || location.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Tab switching function
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Update active tab button
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            
+            // If switching to gallery, initialize it
+            if (tabName === 'gallery') {
+                generateGalleryCards();
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate gallery cards
+            generateGalleryCards();
+            
+            // Filter button event listeners
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    filterGallery(this.dataset.filter);
+                });
+            });
+            
+            // Search input event listener
+            document.getElementById('searchGallery').addEventListener('input', function() {
+                searchGallery(this.value);
+            });
+            
+            // Hamburger menu functionality
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mainTabs = document.querySelector('.tabs');
+            
+            hamburgerBtn.addEventListener('click', function() {
+                mainTabs.classList.toggle('open');
+                this.classList.toggle('active');
+            });
+        });
+        
