@@ -4,33 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plan your perfect trip with WanderWise - Smart routes, hidden gems, and comprehensive travel planning tools.">
     <title>Smart Travel Itinerary Planner</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="container">
         <div class="header">
-             <button class="theme-toggle" id="themeToggle">
+            <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
             </button>
-             <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
-        <i class="fas fa-bars"></i></button>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+                <i class="fas fa-bars"></i></button>
             <h1><i class="fas fa-globe-americas"></i> Smart Travel Planner</h1>
             <p>Plan your perfect trip with intelligent routing and comprehensive preparation tools</p>
         </div>
 
         <div class="tabs-container">
             <div id="mainTabs" class="tabs">
-                <button class="tab active" onclick="switchTab('itinerary')"><i class="fas fa-calendar-alt"></i>Itinerary</button>
-                <button class="tab active" onclick="switchTab('routes')"><i class="fas fa-route"></i> Smart Routes</button>
-                <button class="tab active" onclick="switchTab('checklist')"><i class="fas fa-check-circle"></i> Prep Checklist</button>
-                <button class="tab active" onclick="switchTab('packing')"><i class="fas fa-suitcase"></i> Packing</button>
-                <button class="tab active" onclick="switchTab('documents')"><i class="fas fa-file-alt"></i> Documents</button>
-                <button class="tab active" onclick="switchTab('currency')"><i class="fas fa-money-bill-wave"></i>Currency</button>
-                <button class="tab active" onclick="switchTab('gallery')"><i class="fas fa-images"></i> Gallery</button>
+                <button class="tab active" onclick="switchTab('itinerary')" role="tab" aria-selected="true">
+                    <i class="fas fa-calendar-alt"></i>Itinerary
+                </button>
+                <button class="tab active" onclick="switchTab('routes')" role="tab" aria-selected="false">
+                    <i class="fas fa-route"></i> Smart Routes
+                </button>
+                <button class="tab active" onclick="switchTab('checklist')">
+                    <i class="fas fa-check-circle"></i>Prep Checklist
+                </button>
+                <button class="tab active" onclick="switchTab('packing')">
+                    <i class="fas fa-suitcase"></i>Packing
+                </button>
+                <button class="tab active" onclick="switchTab('documents')">
+                    <i class="fas fa-file-alt"></i>Documents
+                </button>
+                <button class="tab active" onclick="switchTab('currency')">
+                    <i class="fas fa-money-bill-wave"></i>Currency
+                </button>
+                <button class="tab active" onclick="switchTab('gallery')">
+                    <i class="fas fa-images"></i> Gallery
+                </button>
             </div>
         </div>
 
@@ -74,7 +91,9 @@
                 <input type="time" id="activityTime" style="margin-top: 10px;">
                 <input type="text" id="activityLocation" placeholder="Location" style="margin-top: 10px;">
                 <input type="number" id="activityCost" placeholder="Estimated cost (₹)" style="margin-top: 10px;">
-                <button class="btn" onclick="addItineraryItem()" style="margin-top: 10px;"><i class="fas fa-plus"></i>Add Activity</button>
+                <button class="btn" onclick="addItineraryItem()" style="margin-top: 10px;">
+                    <i class="fas fa-plus"></i>Add Activity
+                </button>
             </div>
 
             <div id="itineraryList"></div>
@@ -93,7 +112,9 @@
                     <input type="text" id="toLocation" placeholder="Destination">
                 </div>
             </div>
-            <button class="btn" onclick="findRoute()"><i class="fas fa-search"></i> Find Best Route</button>
+            <button class="btn" onclick="findRoute()">
+                <i class="fas fa-search"></i> Find Best Route
+            </button>
 
             <div id="routeResults"></div>
         </div>
@@ -162,19 +183,21 @@
         <!-- Documents Tab -->
         <div id="documents" class="tab-content">
             <h2><i class="fas fa-file-alt"></i> Travel Document Tracker</h2>
-            <button class="btn" onclick="showAddDocumentModal()"><i class="fas fa-plus"></i> Add Document</button>
+            <button class="btn" onclick="showAddDocumentModal()">
+                <i class="fas fa-plus"></i> Add Document
+            </button>
             <div class="document-tracker" id="documentList"></div>
         </div>
         <!-- New Gallery Tab -->
         <div id="gallery" class="tab-content active">
             <h2><i class="fas fa-images"></i> World Gallery</h2>
             <p class="subtitle">Discover the most breathtaking destinations around the globe</p>
-            
+
             <div class="gallery-search">
                 <input type="text" id="searchGallery" placeholder="Search destinations...">
                 <i class="fas fa-search"></i>
             </div>
-            
+
             <div class="gallery-filter">
                 <button class="filter-btn active" data-filter="all">All Destinations</button>
                 <button class="filter-btn" data-filter="europe">Europe</button>
@@ -183,8 +206,9 @@
                 <button class="filter-btn" data-filter="africa">Africa</button>
                 <button class="filter-btn" data-filter="oceania">Oceania</button>
             </div>
-            
+
             <div id="gallery-container" class="gallery-grid"></div>
+        </div>
 
         <!-- Currency Tab -->
         <div id="currency" class="tab-content">
@@ -216,7 +240,9 @@
                         </select>
                     </div>
                 </div>
-                <button class="btn" onclick="convertCurrency()"><i class="fas fa-exchange-alt"></i> Convert</button>
+                <button class="btn" onclick="convertCurrency()">
+                    <i class="fas fa-exchange-alt"></i> Convert
+                </button>
 
                 <div class="currency-card">
                     <h4><i class="fas fa-calculator"></i> Conversion Result</h4>
@@ -240,66 +266,79 @@
                 </div>
             </div>
         </div>
-    </div>
-                
-    <!-- Add Document Modal -->
-    <div id="documentModal" class="modal">
-        <div class="modal-content">
-            <h3><i class="fas fa-file-medical"></i> Add Travel Document</h3>
-            <div class="form-group">
-                <label><i class="fas fa-file-signature"></i> Document Type</label>
-                <select id="docType">
-                    <option value="passport">Passport</option>
-                    <option value="visa">Visa</option>
-                    <option value="license">Driver's License</option>
-                    <option value="insurance">Travel Insurance</option>
-                    <option value="vaccination">Vaccination Certificate</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-hashtag"></i> Document Number</label>
-                <input type="text" id="docNumber">
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-calendar-times"></i> Expiry Date</label>
-                <input type="date" id="docExpiry">
-            </div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn" onclick="addDocument()"><i class="fas fa-plus"></i> Add Document</button>
-                <button class="btn btn-secondary" onclick="closeModal()"><i class="fas fa-times"></i> Cancel</button>
+
+        <!-- Add Document Modal -->
+        <div id="documentModal" class="modal">
+            <div class="modal-content">
+                <h3><i class="fas fa-file-medical"></i> Add Travel Document</h3>
+                <div class="form-group">
+                    <label><i class="fas fa-file-signature"></i> Document Type</label>
+                    <select id="docType">
+                        <option value="passport">Passport</option>
+                        <option value="visa">Visa</option>
+                        <option value="license">Driver's License</option>
+                        <option value="insurance">Travel Insurance</option>
+                        <option value="vaccination">Vaccination Certificate</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-hashtag"></i> Document Number</label>
+                    <input type="text" id="docNumber">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-times"></i> Expiry Date</label>
+                    <input type="date" id="docExpiry">
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn" onclick="addDocument()">
+                        <i class="fas fa-plus"></i> Add Document
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeModal()">
+                        <i class="fas fa-times"></i>Cancel
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <button class="floating-action" onclick="exportItinerary()"><i class="fas fa-file-download"></i></button>
+        <button class="floating-action" onclick="exportItinerary()">
+            <i class="fas fa-file-download"></i>
+        </button>
 
-    <div id="notification" class="notification">
-        <i class="fas fa-check-circle"></i>
-        <span id="notificationText">Notification message</span>
-    </div>
-    <div id="notification" class="notification">
-        <i class="fas fa-check-circle"></i>
-        <span id="notificationText">Notification message</span>
-    </div>
-
-    <!-- Back to Top Button -->
-<button id="backToTop" title="Back to top">
-    <i class="fas fa-arrow-up"></i>
-</button>
-
-<footer class="footer">
-    <div class="footer-content">
-        <span>© 2025 WanderWise. Travel smarter.</span>
-        <div class="footer-social">
-            <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:hello@wanderwise.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <div id="notification" class="notification">
+            <i class="fas fa-check-circle"></i>
+            <span id="notificationText">Notification message</span>
         </div>
-    </div>
-</footer>
-<script src="script.js"></script>
+        <div id="notification" class="notification">
+            <i class="fas fa-check-circle"></i>
+            <span id="notificationText">Notification message</span>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button id="backToTop" title="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <span>© 2025 WanderWise. Travel smarter.</span>
+                <div class="footer-social">
+                    <a href="https://twitter.com/" target="_blank" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://facebook.com/" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com/" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="mailto:hello@wanderwise.com" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+        <script src="script.js"></script>
 </body>
 </html>
