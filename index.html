@@ -85,17 +85,42 @@
             <h2><i class="fas fa-route"></i> Smart Route Planning</h2>
             <div class="grid">
                 <div class="form-group">
-                    <label><i class="fas fa-location-arrow"></i> From</label>
-                    <input type="text" id="fromLocation" placeholder="Starting location">
+                    <label><i class="fas fa-location-arrow"></i> From Country</label>
+                    <select id="fromCountry">
+                        <option value="">Select country</option>
+                        <option value="India">India</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="USA">United States</option>
+                        <option value="Nepal">Nepal</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Australia">Australia</option>
+                        <!-- Add more countries as needed -->
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label><i class="fas fa-map-marker-alt"></i> To</label>
-                    <input type="text" id="toLocation" placeholder="Destination">
+                    <label><i class="fas fa-map-marker-alt"></i> To Country</label>
+                    <select id="toCountry">
+                        <option value="">Select country</option>
+                        <option value="India">India</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="USA">United States</option>
+                        <option value="Nepal">Nepal</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Australia">Australia</option>
+                        <!-- Add more countries as needed -->
+                    </select>
                 </div>
             </div>
             <button class="btn" onclick="findRoute()"><i class="fas fa-search"></i> Find Best Route</button>
 
             <div id="routeResults"></div>
+
+            <!-- Visa & Entry Requirements -->
+            <div id="visaInfo" class="visa-info" style="margin-top: 20px; display:none;">
+                <h3><i class="fas fa-passport"></i> Visa & Entry Requirements</h3>
+                <div id="visaDetails">Please select your route to check visa requirements.</div>
+                <div id="visaReminders" style="margin-top:10px;"></div>
+            </div>
         </div>
 
         <!-- Checklist Tab -->
