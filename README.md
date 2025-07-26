@@ -19,20 +19,35 @@ Smart Travel Planner is a comprehensive web application that helps travelers cre
 🌓 Light/Dark Mode toggle
 📱 Fully Responsive Design for all devices
 
-# Technologies Used
+## 🎨 CSS Highlights  
 
-HTML5 - Semantic structure
-CSS3 - Modern styling with Flexbox, Grid, and animations
-JavaScript - Interactive functionality
-Font Awesome - Icon library
-Google Fonts - Typography
+| 🎨 Feature                 | 📝 Description --------------------------------------------------------------------------|
+| `flip-hover`, `fade-in`   | Card interactions and smooth entrance animations                        |
+| `bounce-hover`, `pulse-on-click` | Interactive feedback for buttons and checklist items             |
+| Responsive Grid & Flexbox | Layout adapts dynamically across all screen sizes                       |
+| Theme Tokens via `:root` | Centralized design variables for spacing, color, and font consistency    |
+| `.dark-mode` Styles       | Scoped dark mode classes for elegant nighttime browsing                  |
+| Accessibility Enhancements| Keyboard-friendly navigation and visible focus rings                    |
+| Hamburger Menu Toggle     | Mobile navigation with animated drawer reveal                           |
+| Custom Scrollbar Styling  | Sleek and minimal scroll appearance across sections                      |
 
-# Design Highlights
 
-Creative Hover Effects: 3D card rotations, animated buttons, and interactive elements
-Flex Cards: Modern stat cards with responsive design
-Smooth Animations: Subtle transitions and entrance effects
-Mobile-First Approach: Fully responsive with hamburger menu
+# 🛠 Technologies Used  
+
+- **HTML5** – Semantic, well-structured markup  
+- **CSS3** – Flexbox, Grid, custom animations, and media queries  
+- **JavaScript** – Dynamic routing, checklist tracking, and event handling  
+- **Font Awesome** – Iconography tailored to travel context  
+- **Google Fonts** – Visually appealing typography with fallback support  
+
+
+# 🖼️ Design Highlights  
+
+- 🎯 **Creative Hover Effects** – Flip cards, icon bounce, and glowing buttons  
+- 🧾 **Flex Cards** – Modular travel data blocks, optimized for preview clarity  
+- 🎬 **Smooth Animations** – Slide-ins, fades, and scaling transitions  
+- 🌗 **Light/Dark Toggle** – User-controlled theme switch with scoped style behavior  
+- 📲 **Mobile-First** – Hamburger menu, stacked layouts, and adaptive grids  
 
 # How to Use
 
