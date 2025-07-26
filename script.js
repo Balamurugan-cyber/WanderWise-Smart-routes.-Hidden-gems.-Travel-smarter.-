@@ -1,4 +1,4 @@
-  // Theme toggle functionality
+// Theme toggle functionality
         const themeToggle = document.getElementById('themeToggle');
         const icon = themeToggle.querySelector('i');
         
@@ -141,34 +141,86 @@
 
         // Smart routes functionality
         function findRoute() {
-            const from = document.getElementById('fromLocation').value;
-            const to = document.getElementById('toLocation').value;
-            
+            const from = document.getElementById("fromCountry").value;
+            const to = document.getElementById("toCountry").value;
+
+            const routeResults = document.getElementById("routeResults");
             if (!from || !to) {
-                showNotification('Please enter both locations');
+                routeResults.innerHTML = `<p style="color:var(--danger)">Please select both countries.</p>`;
+                document.getElementById("visaInfo").style.display = "none";
                 return;
             }
-            
-            // Simulate finding a route
-            document.getElementById('routeStart').textContent = from;
-            document.getElementById('routeEnd').textContent = to;
-            
-            // Generate random transport method
-            const transports = ['Metro', 'Bus', 'Taxi', 'Walk', 'Bike', 'Ride Share'];
-            const transport = transports[Math.floor(Math.random() * transports.length)];
-            document.getElementById('routeTransport').textContent = transport;
-            
-            // Generate random duration (15-120 minutes)
-            const duration = Math.floor(Math.random() * 105) + 15;
-            document.getElementById('routeDuration').textContent = `${duration} minutes`;
-            
-            // Generate random cost (50-500 rupees)
-            const cost = Math.floor(Math.random() * 451) + 50;
-            document.getElementById('routeCost').textContent = `₹${cost}`;
-            
-            // Show results
-            document.getElementById('routeResults').style.display = 'block';
-            showNotification('Route found!');
+            routeResults.innerHTML = `
+                <h4><i class="fas fa-map-signs"></i> Best Route</h4>
+                <p><strong>From:</strong> ${from}</p>
+                <p><strong>To:</strong> ${to}</p>
+                <p><strong>Recommended:</strong> Take a taxi or use public transport for fastest route.</p>
+            `;
+
+            // Show Visa Info
+            const visaInfo = document.getElementById("visaInfo");
+            const visaDetails = document.getElementById("visaDetails");
+            const visaReminders = document.getElementById("visaReminders");
+            visaInfo.style.display = "block";
+
+            // Get visa requirements and reminders
+            const visaData = getVisaRequirement(from, to);
+            visaDetails.innerHTML = visaData.requirements;
+            visaReminders.innerHTML = visaData.reminders;
+        }
+
+        function getVisaRequirement(from, to) {
+            // Example data, expand as needed
+            if (from === "India" && to === "UK") {
+                return {
+                    requirements: `
+                        <ul>
+                            <li><strong>Visa Needed:</strong> Yes (UK Visitor Visa)</li>
+                            <li><strong>Documents:</strong> Passport, Visa Application, Proof of Funds, Return Ticket</li>
+                            <li><strong>Vaccination:</strong> COVID-19 vaccination recommended</li>
+                            <li><strong>On-arrival Fees:</strong> None</li>
+                        </ul>
+                    `,
+                    reminders: `
+                        <div style="color:var(--warning)">
+                            <i class="fas fa-bell"></i> Apply for UK visa at least 4 weeks before travel.<br>
+                            <i class="fas fa-bell"></i> Set reminders for passport and visa expiry dates!
+                        </div>
+                    `
+                };
+            } else if (from === "India" && to === "Nepal") {
+                return {
+                    requirements: `
+                        <ul>
+                            <li><strong>Visa Needed:</strong> No</li>
+                            <li><strong>Documents:</strong> Passport or Voter ID</li>
+                            <li><strong>Vaccination:</strong> None required</li>
+                            <li><strong>On-arrival Fees:</strong> None</li>
+                        </ul>
+                    `,
+                    reminders: `
+                        <div style="color:var(--success)">
+                            <i class="fas fa-check-circle"></i> No visa required. Carry valid ID.
+                        </div>
+                    `
+                };
+            }
+            // Default
+            return {
+                requirements: `
+                    <ul>
+                        <li><strong>Visa Needed:</strong> Check embassy website</li>
+                        <li><strong>Documents:</strong> Passport, supporting documents</li>
+                        <li><strong>Vaccination:</strong> May be required</li>
+                        <li><strong>On-arrival Fees:</strong> Varies</li>
+                    </ul>
+                `,
+                reminders: `
+                    <div style="color:var(--warning)">
+                        <i class="fas fa-bell"></i> Check visa deadlines and set reminders for document expiry.
+                    </div>
+                `
+            };
         }
 
         // Checklist functionality
@@ -553,25 +605,6 @@ function updateChecklistProgress() {
 
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', renderChecklist);
-window.findRoute = function() {
-    const from = document.getElementById('fromLocation').value.trim();
-    const to = document.getElementById('toLocation').value.trim();
-    const resultDiv = document.getElementById('routeResults');
-    if (!from || !to) {
-        resultDiv.innerHTML = '<div class="alert">Please enter both locations.</div>';
-        return;
-    }
-    // Dummy route logic for demo
-    resultDiv.innerHTML = `
-        <div class="route-card">
-            <h4><i class="fas fa-map-signs"></i> Best Route</h4>
-            <div><b>From:</b> ${from}</div>
-             <div><b>To:</b> ${to}</div>
-            <div><b>Recommended:</b> Take a taxi or use public transport for fastest route.</div>
-        </div>
-    `;
-};
-
 // Back to Top button logic
 const backToTopBtn = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {
@@ -749,7 +782,7 @@ backToTopBtn.addEventListener('click', () => {
         function generateGalleryCards() {
             const galleryContainer = document.getElementById('gallery-container');
             galleryContainer.innerHTML = '';
-            
+
             galleryData.forEach((place, index) => {
                 const card = document.createElement('div');
                 card.className = 'gallery-card';
@@ -770,7 +803,7 @@ backToTopBtn.addEventListener('click', () => {
                     </div>
                 `;
                 galleryContainer.appendChild(card);
-                
+
                 // Add scroll animation
                 setTimeout(() => {
                     observeCard(card);
@@ -808,11 +841,11 @@ backToTopBtn.addEventListener('click', () => {
         function searchGallery(query) {
             const cards = document.querySelectorAll('.gallery-card');
             const searchTerm = query.toLowerCase();
-            
+
             cards.forEach(card => {
                 const title = card.querySelector('.card-title').textContent.toLowerCase();
                 const location = card.querySelector('.card-location span').textContent.toLowerCase();
-                
+
                 if (title.includes(searchTerm) || location.includes(searchTerm)) {
                     card.style.display = 'block';
                 } else {
@@ -827,17 +860,17 @@ backToTopBtn.addEventListener('click', () => {
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
+
             // Show selected tab content
             document.getElementById(tabName).classList.add('active');
-            
+
             // Update active tab button
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
+
             event.target.classList.add('active');
-            
+
             // If switching to gallery, initialize it
             if (tabName === 'gallery') {
                 generateGalleryCards();
@@ -848,7 +881,7 @@ backToTopBtn.addEventListener('click', () => {
         document.addEventListener('DOMContentLoaded', function() {
             // Generate gallery cards
             generateGalleryCards();
-            
+
             // Filter button event listeners
             document.querySelectorAll('.filter-btn').forEach(button => {
                 button.addEventListener('click', function() {
@@ -857,19 +890,18 @@ backToTopBtn.addEventListener('click', () => {
                     filterGallery(this.dataset.filter);
                 });
             });
-            
+
             // Search input event listener
             document.getElementById('searchGallery').addEventListener('input', function() {
                 searchGallery(this.value);
             });
-            
+
             // Hamburger menu functionality
             const hamburgerBtn = document.getElementById('hamburgerBtn');
             const mainTabs = document.querySelector('.tabs');
-            
+
             hamburgerBtn.addEventListener('click', function() {
                 mainTabs.classList.toggle('open');
                 this.classList.toggle('active');
             });
         });
-        

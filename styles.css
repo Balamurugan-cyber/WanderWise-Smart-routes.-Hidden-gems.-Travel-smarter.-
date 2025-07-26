@@ -670,6 +670,20 @@
             bottom: 30px;
         }
 
+        /* Visa Info Styles */
+        .visa-info {
+            padding: 15px;
+            background: #f5f7ff;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .visa-info h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .tabs {
@@ -1009,4 +1023,3 @@
                 font-size: 0.9rem;
             }
         }
-        
