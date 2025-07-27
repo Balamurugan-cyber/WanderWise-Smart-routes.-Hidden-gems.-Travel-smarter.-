@@ -17,20 +17,20 @@
                 <i class="fas fa-moon"></i>
             </button>
              <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
-        <i class="fas fa-bars"></i>
-    </button>
+        <i class="fas fa-bars"></i></button>
             <h1><i class="fas fa-globe-americas"></i> Smart Travel Planner</h1>
             <p>Plan your perfect trip with intelligent routing and comprehensive preparation tools</p>
         </div>
 
         <div class="tabs-container">
-            <div class="tabs">
+            <div id="mainTabs" class="tabs">
                 <button class="tab active" onclick="switchTab('itinerary')"><i class="fas fa-calendar-alt"></i>Itinerary</button>
-                <button class="tab" onclick="switchTab('routes')"><i class="fas fa-route"></i> Smart Routes</button>
-                <button class="tab" onclick="switchTab('checklist')"><i class="fas fa-check-circle"></i> Prep Checklist</button>
-                <button class="tab" onclick="switchTab('packing')"><i class="fas fa-suitcase"></i> Packing</button>
-                <button class="tab" onclick="switchTab('documents')"><i class="fas fa-file-alt"></i> Documents</button>
-                <button class="tab" onclick="switchTab('currency')"><i class="fas fa-money-bill-wave"></i>Currency</button>
+                <button class="tab active" onclick="switchTab('routes')"><i class="fas fa-route"></i> Smart Routes</button>
+                <button class="tab active" onclick="switchTab('checklist')"><i class="fas fa-check-circle"></i> Prep Checklist</button>
+                <button class="tab active" onclick="switchTab('packing')"><i class="fas fa-suitcase"></i> Packing</button>
+                <button class="tab active" onclick="switchTab('documents')"><i class="fas fa-file-alt"></i> Documents</button>
+                <button class="tab active" onclick="switchTab('currency')"><i class="fas fa-money-bill-wave"></i>Currency</button>
+                <button class="tab active" onclick="switchTab('gallery')"><i class="fas fa-images"></i> Gallery</button>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
 
             <div class="trip-stats">
                 <div class="stat-card">
-                    <div class="value" id="tripDays">3</div>
+                    <div class="value" id="tripDays">0</div>
                     <div class="label">Days</div>
                 </div>
                 <div class="stat-card">
@@ -165,6 +165,26 @@
             <button class="btn" onclick="showAddDocumentModal()"><i class="fas fa-plus"></i> Add Document</button>
             <div class="document-tracker" id="documentList"></div>
         </div>
+        <!-- New Gallery Tab -->
+        <div id="gallery" class="tab-content active">
+            <h2><i class="fas fa-images"></i> World Gallery</h2>
+            <p class="subtitle">Discover the most breathtaking destinations around the globe</p>
+            
+            <div class="gallery-search">
+                <input type="text" id="searchGallery" placeholder="Search destinations...">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all">All Destinations</button>
+                <button class="filter-btn" data-filter="europe">Europe</button>
+                <button class="filter-btn" data-filter="asia">Asia</button>
+                <button class="filter-btn" data-filter="americas">Americas</button>
+                <button class="filter-btn" data-filter="africa">Africa</button>
+                <button class="filter-btn" data-filter="oceania">Oceania</button>
+            </div>
+            
+            <div id="gallery-container" class="gallery-grid"></div>
 
         <!-- Currency Tab -->
         <div id="currency" class="tab-content">
@@ -187,6 +207,12 @@
                             <option value="JPY">Japanese Yen (JPY)</option>
                             <option value="AUD">Australian Dollar (AUD)</option>
                             <option value="CAD">Canadian Dollar (CAD)</option>
+                            <option value="CNY">Chinese Yuan (CNY)</option>
+                            <option value="SGD">Singapore Dollar (SGD)</option>
+                            <option value="ZAR">South African Rand (ZAR)</option>
+                            <option value="BRL">Brazilian Real (BRL)</option>
+                            <option value="RUB">Russian Ruble (RUB)</option>
+                            <option value="KRW">South Korean Won (KRW)</option>
                         </select>
                     </div>
                 </div>
@@ -205,11 +231,17 @@
                     <div>JPY: ¥1.70</div>
                     <div>AUD: A$0.018</div>
                     <div>CAD: C$0.016</div>
+                    <div>CNY: ¥12.09</div>
+                    <div>SGD: S$67.54</div>
+                    <div>ZAR: R4.87</div>
+                    <div>BRL: R$15.64</div>
+                    <div>RUB: ₽1.09</div>
+                    <div>KRW: ₩0.063</div>
                 </div>
             </div>
         </div>
     </div>
-
+                
     <!-- Add Document Modal -->
     <div id="documentModal" class="modal">
         <div class="modal-content">
@@ -240,6 +272,7 @@
         </div>
     </div>
 
+
     <button class="floating-action" onclick="exportItinerary()"><i class="fas fa-file-download"></i></button>
 
     <div id="notification" class="notification">
@@ -250,7 +283,11 @@
         <i class="fas fa-check-circle"></i>
         <span id="notificationText">Notification message</span>
     </div>
-<script src="script.js"></script>
+
+    <!-- Back to Top Button -->
+<button id="backToTop" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+</button>
 
 <footer class="footer">
     <div class="footer-content">
