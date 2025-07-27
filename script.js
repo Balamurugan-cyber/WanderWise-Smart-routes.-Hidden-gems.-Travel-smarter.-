@@ -572,17 +572,64 @@ window.findRoute = function() {
     `;
 };
 
-// Back to Top button logic
+// Enhanced Back to Top button logic
 const backToTopBtn = document.getElementById('backToTop');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopBtn.style.display = 'flex';
+let isScrolling = false;
+
+// Throttle scroll events for better performance
+function throttle(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Enhanced scroll handler with smooth animations
+const handleScroll = throttle(() => {
+    const scrollY = window.scrollY;
+    const showThreshold = 1; // Set to 1px - appears immediately when user scrolls down even slightly
+    
+    if (scrollY > showThreshold) {
+        if (!backToTopBtn.classList.contains('show')) {
+            backToTopBtn.classList.add('show');
+        }
     } else {
-        backToTopBtn.style.display = 'none';
+        if (backToTopBtn.classList.contains('show')) {
+            backToTopBtn.classList.remove('show');
+        }
     }
-});
+}, 100);
+
+// Add scroll event listener
+window.addEventListener('scroll', handleScroll);
+
+// Enhanced click handler with improved smooth scrolling
 backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Add active state feedback
+    backToTopBtn.style.transform = 'translateY(-1px) scale(1.05)';
+    
+    // Smooth scroll to top with better easing
+    window.scrollTo({ 
+        top: 0, 
+        behavior: 'smooth' 
+    });
+    
+    // Reset button state after animation
+    setTimeout(() => {
+        backToTopBtn.style.transform = '';
+    }, 150);
+    
+    // Hide button immediately when clicked from very top
+    setTimeout(() => {
+        if (window.scrollY < 100) {
+            backToTopBtn.classList.remove('show');
+        }
+    }, 600);
 });
 
 // Gallery data
