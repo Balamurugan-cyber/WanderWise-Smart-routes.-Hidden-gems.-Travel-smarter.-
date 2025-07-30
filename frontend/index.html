@@ -1,333 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Travel Itinerary Planner</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Travel Itinerary Planner</title>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
-  <div class="container">
-    <div class="header">
-      <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-      </button>
-      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
-        <i class="fas fa-bars"></i>
-      </button>
+  <body>
+    <div class="container">
+      <div class="header">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
 
-      <h1><i class="fas fa-globe-americas"></i> Smart Travel Planner</h1>
-      <p>Plan your perfect trip with intelligent routing and comprehensive preparation tools</p>
+        <h1><i class="fas fa-globe-americas"></i> Smart Travel Planner</h1>
+        <p>Plan your perfect trip with intelligent routing and comprehensive
+          preparation tools</p>
 
-      <!-- === Auth actions (ONE place) === -->
-      <div class="auth-actions" style="margin-top:16px; display:flex; gap:10px; align-items:center; justify-content:center;">
-        <span id="authHello" style="display:flex; align-items:center; gap:6px; display:none;">
-          <i class="fas fa-user"></i>
-          <span id="authUserName"></span>
-        </span>
+        <!-- === Auth actions (ONE place) === -->
+        <div class="auth-actions"
+          style="margin-top:16px; display:flex; gap:10px; align-items:center; justify-content:center;">
+          <span id="authHello"
+            style="display:flex; align-items:center; gap:6px; display:none;">
+            <i class="fas fa-user"></i>
+            <span id="authUserName"></span>
+          </span>
 
-        <button class="btn btn-secondary" id="loginBtn">Login</button>
-        <button class="btn" id="signupBtn">Signup</button>
-        <button class="btn btn-secondary" id="logoutBtn" style="display:none;">Logout</button>
-      </div>
-    </div>
-
-    <div class="tabs-container">
-      <div class="tabs" id="mainTabs">
-        <button class="tab active" onclick="switchTab('itinerary')"><i class="fas fa-calendar-alt"></i>Itinerary</button>
-        <button class="tab" onclick="switchTab('routes')"><i class="fas fa-route"></i> Smart Routes</button>
-        <button class="tab" onclick="switchTab('checklist')"><i class="fas fa-check-circle"></i> Prep Checklist</button>
-        <button class="tab" onclick="switchTab('packing')"><i class="fas fa-suitcase"></i> Packing</button>
-        <button class="tab" onclick="switchTab('documents')"><i class="fas fa-file-alt"></i> Documents</button>
-        <button class="tab" onclick="switchTab('currency')"><i class="fas fa-money-bill-wave"></i>Currency</button>
-      </div>
-    </div>
-
-    <!-- ===================== Itinerary Tab ===================== -->
-    <div id="itinerary" class="tab-content active">
-      <h2><i class="fas fa-calendar-alt"></i> Travel Itinerary</h2>
-
-      <div class="trip-stats">
-        <div class="stat-card">
-          <div class="value" id="tripDays">3</div>
-          <div class="label">Days</div>
-        </div>
-        <div class="stat-card">
-          <div class="value" id="tripActivities">0</div>
-          <div class="label">Activities</div>
-        </div>
-        <div class="stat-card">
-          <div class="value" id="tripBudget">₹0</div>
-          <div class="label">Estimated Budget</div>
+          <button class="btn btn-secondary" id="loginBtn">Login</button>
+          <button class="btn" id="signupBtn">Signup</button>
+          <button class="btn btn-secondary" id="logoutBtn"
+            style="display:none;">Logout</button>
         </div>
       </div>
 
-      <div class="form-group">
-        <label><i class="fas fa-map-marker-alt"></i> Destination</label>
-        <input type="text" id="destination" placeholder="Enter your destination" />
+      <div class="tabs-container">
+        <div class="tabs" id="mainTabs">
+          <button class="tab active" onclick="switchTab('itinerary')"><i
+              class="fas fa-calendar-alt"></i>Itinerary</button>
+          <button class="tab" onclick="switchTab('routes')"><i
+              class="fas fa-route"></i> Smart Routes</button>
+          <button class="tab" onclick="switchTab('checklist')"><i
+              class="fas fa-check-circle"></i> Prep Checklist</button>
+          <button class="tab" onclick="switchTab('packing')"><i
+              class="fas fa-suitcase"></i> Packing</button>
+          <button class="tab" onclick="switchTab('documents')"><i
+              class="fas fa-file-alt"></i> Documents</button>
+          <button class="tab" onclick="switchTab('currency')"><i
+              class="fas fa-money-bill-wave"></i>Currency</button>
+        </div>
       </div>
-      <div class="grid">
+
+      <!-- ===================== Itinerary Tab ===================== -->
+      <div id="itinerary" class="tab-content active">
+        <h2><i class="fas fa-calendar-alt"></i> Travel Itinerary</h2>
+
+        <div class="trip-stats">
+          <div class="stat-card">
+            <div class="value" id="tripDays">3</div>
+            <div class="label">Days</div>
+          </div>
+          <div class="stat-card">
+            <div class="value" id="tripActivities">0</div>
+            <div class="label">Activities</div>
+          </div>
+          <div class="stat-card">
+            <div class="value" id="tripBudget">₹0</div>
+            <div class="label">Estimated Budget</div>
+          </div>
+        </div>
+
         <div class="form-group">
-          <label><i class="fas fa-calendar-day"></i> Start Date</label>
-          <input type="date" id="startDate" />
+          <label><i class="fas fa-map-marker-alt"></i> Destination</label>
+          <input type="text" id="destination"
+            placeholder="Enter your destination" />
         </div>
+        <div class="grid">
+          <div class="form-group">
+            <label><i class="fas fa-calendar-day"></i> Start Date</label>
+            <input type="date" id="startDate" />
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-calendar-day"></i> End Date</label>
+            <input type="date" id="endDate" />
+          </div>
+        </div>
+
         <div class="form-group">
-          <label><i class="fas fa-calendar-day"></i> End Date</label>
-          <input type="date" id="endDate" />
+          <label><i class="fas fa-plus-circle"></i> Add Activity</label>
+          <input type="text" id="activityName" placeholder="Activity name" />
+          <input type="time" id="activityTime" style="margin-top: 10px" />
+          <input type="text" id="activityLocation" placeholder="Location"
+            style="margin-top: 10px" />
+          <input type="number" id="activityCost"
+            placeholder="Estimated cost (₹)" style="margin-top: 10px" />
+          <button class="btn" onclick="addItineraryItem()"
+            style="margin-top: 10px"><i class="fas fa-plus"></i>Add
+            Activity</button>
+        </div>
+
+        <div id="itineraryList"></div>
+      </div>
+
+      <!-- ===================== Smart Routes Tab ===================== -->
+      <div id="routes" class="tab-content">
+        <h2><i class="fas fa-route"></i> Smart Route Planning</h2>
+        <div class="grid">
+          <div class="form-group">
+            <label><i class="fas fa-location-arrow"></i> From</label>
+            <input type="text" id="fromLocation"
+              placeholder="Starting location" />
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-map-marker-alt"></i> To</label>
+            <input type="text" id="toLocation" placeholder="Destination" />
+          </div>
+        </div>
+        <button class="btn" onclick="findRoute()"><i class="fas fa-search"></i>
+          Find Best Route</button>
+
+        <div id="routeResults"></div>
+      </div>
+
+      <!-- ===================== Checklist Tab ===================== -->
+      <div id="checklist" class="tab-content">
+        <h2><i class="fas fa-check-circle"></i> Trip Preparation Checklist</h2>
+        <div class="grid">
+          <div class="card">
+            <h3><i class="fas fa-clipboard-list"></i> Pre-Trip (2-4 weeks
+              before)</h3>
+            <div class="checklist" id="preTrip"></div>
+          </div>
+          <div class="card">
+            <h3><i class="fas fa-calendar-week"></i> 1 Week Before</h3>
+            <div class="checklist" id="oneWeek"></div>
+          </div>
+          <div class="card">
+            <h3><i class="fas fa-plane-departure"></i> Day Before</h3>
+            <div class="checklist" id="dayBefore"></div>
+          </div>
+        </div>
+        <div style="margin-top: 20px">
+          <h3><i class="fas fa-tasks"></i> Progress</h3>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"
+              style="width: 0%"></div>
+          </div>
+          <p id="progressText">0% Complete</p>
         </div>
       </div>
 
-      <div class="form-group">
-        <label><i class="fas fa-plus-circle"></i> Add Activity</label>
-        <input type="text" id="activityName" placeholder="Activity name" />
-        <input type="time" id="activityTime" style="margin-top: 10px" />
-        <input type="text" id="activityLocation" placeholder="Location" style="margin-top: 10px" />
-        <input type="number" id="activityCost" placeholder="Estimated cost (₹)" style="margin-top: 10px" />
-        <button class="btn" onclick="addItineraryItem()" style="margin-top: 10px"><i class="fas fa-plus"></i>Add Activity</button>
-      </div>
-
-      <div id="itineraryList"></div>
-    </div>
-
-    <!-- ===================== Smart Routes Tab ===================== -->
-    <div id="routes" class="tab-content">
-      <h2><i class="fas fa-route"></i> Smart Route Planning</h2>
-      <div class="grid">
+      <!-- ===================== Packing Tab ===================== -->
+      <div id="packing" class="tab-content">
+        <h2><i class="fas fa-suitcase"></i> Smart Packing Assistant</h2>
         <div class="form-group">
-          <label><i class="fas fa-location-arrow"></i> From</label>
-          <input type="text" id="fromLocation" placeholder="Starting location" />
-        </div>
-        <div class="form-group">
-          <label><i class="fas fa-map-marker-alt"></i> To</label>
-          <input type="text" id="toLocation" placeholder="Destination" />
-        </div>
-      </div>
-      <button class="btn" onclick="findRoute()"><i class="fas fa-search"></i> Find Best Route</button>
-
-      <div id="routeResults"></div>
-    </div>
-
-    <!-- ===================== Checklist Tab ===================== -->
-    <div id="checklist" class="tab-content">
-      <h2><i class="fas fa-check-circle"></i> Trip Preparation Checklist</h2>
-      <div class="grid">
-        <div class="card">
-          <h3><i class="fas fa-clipboard-list"></i> Pre-Trip (2-4 weeks before)</h3>
-          <div class="checklist" id="preTrip"></div>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-calendar-week"></i> 1 Week Before</h3>
-          <div class="checklist" id="oneWeek"></div>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-plane-departure"></i> Day Before</h3>
-          <div class="checklist" id="dayBefore"></div>
-        </div>
-      </div>
-      <div style="margin-top: 20px">
-        <h3><i class="fas fa-tasks"></i> Progress</h3>
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-        </div>
-        <p id="progressText">0% Complete</p>
-      </div>
-    </div>
-
-    <!-- ===================== Packing Tab ===================== -->
-    <div id="packing" class="tab-content">
-      <h2><i class="fas fa-suitcase"></i> Smart Packing Assistant</h2>
-      <div class="form-group">
-        <label><i class="fas fa-suitcase-rolling"></i> Trip Type</label>
-        <select id="tripType" onchange="generatePackingList()">
-          <option value="">Select trip type</option>
-          <option value="business">Business</option>
-          <option value="leisure">Leisure</option>
-          <option value="adventure">Adventure</option>
-          <option value="beach">Beach</option>
-          <option value="city">City Break</option>
-          <option value="backpacking">Backpacking</option>
-        </select>
-      </div>
-      <div class="grid">
-        <div class="form-group">
-          <label><i class="fas fa-calendar"></i> Duration (days)</label>
-          <input type="number" id="tripDuration" min="1" value="3" onchange="generatePackingList()" />
-        </div>
-        <div class="form-group">
-          <label><i class="fas fa-cloud-sun"></i> Weather</label>
-          <select id="weather" onchange="generatePackingList()">
-            <option value="">Select weather</option>
-            <option value="hot">Hot</option>
-            <option value="warm" selected>Warm</option>
-            <option value="mild">Mild</option>
-            <option value="cold">Cold</option>
-            <option value="mixed">Mixed</option>
+          <label><i class="fas fa-suitcase-rolling"></i> Trip Type</label>
+          <select id="tripType" onchange="generatePackingList()">
+            <option value>Select trip type</option>
+            <option value="business">Business</option>
+            <option value="leisure">Leisure</option>
+            <option value="adventure">Adventure</option>
+            <option value="beach">Beach</option>
+            <option value="city">City Break</option>
+            <option value="backpacking">Backpacking</option>
           </select>
         </div>
-      </div>
-      <div id="packingList"></div>
-    </div>
-
-    <!-- ===================== Documents Tab ===================== -->
-    <div id="documents" class="tab-content">
-      <h2><i class="fas fa-file-alt"></i> Travel Document Tracker</h2>
-      <button class="btn" onclick="showAddDocumentModal()"><i class="fas fa-plus"></i> Add Document</button>
-      <div class="document-tracker" id="documentList"></div>
-    </div>
-
-    <!-- ===================== Currency Tab ===================== -->
-    <div id="currency" class="tab-content">
-      <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
-      <div class="currency-converter">
-        <div class="converter-grid">
+        <div class="grid">
           <div class="form-group">
-            <label><i class="fas fa-coins"></i> Amount</label>
-            <input type="number" id="currencyAmount" value="1000" />
-          </div>
-          <div style="text-align: center; margin-top: 25px">
-            <i class="fas fa-exchange-alt fa-2x" style="color: #667eea"></i>
+            <label><i class="fas fa-calendar"></i> Duration (days)</label>
+            <input type="number" id="tripDuration" min="1" value="3"
+              onchange="generatePackingList()" />
           </div>
           <div class="form-group">
-            <label><i class="fas fa-globe"></i> To Currency</label>
-            <select id="toCurrency">
-              <option value="USD">US Dollar (USD)</option>
-              <option value="EUR">Euro (EUR)</option>
-              <option value="GBP">British Pound (GBP)</option>
-              <option value="JPY">Japanese Yen (JPY)</option>
-              <option value="AUD">Australian Dollar (AUD)</option>
-              <option value="CAD">Canadian Dollar (CAD)</option>
+            <label><i class="fas fa-cloud-sun"></i> Weather</label>
+            <select id="weather" onchange="generatePackingList()">
+              <option value>Select weather</option>
+              <option value="hot">Hot</option>
+              <option value="warm" selected>Warm</option>
+              <option value="mild">Mild</option>
+              <option value="cold">Cold</option>
+              <option value="mixed">Mixed</option>
             </select>
           </div>
         </div>
-        <button class="btn" onclick="convertCurrency()"><i class="fas fa-exchange-alt"></i> Convert</button>
+        <div id="packingList"></div>
+      </div>
 
-        <div class="currency-card">
-          <h4><i class="fas fa-calculator"></i> Conversion Result</h4>
-          <div id="conversionResult">Enter amount and select currency to convert</div>
-        </div>
+      <!-- ===================== Documents Tab ===================== -->
+      <div id="documents" class="tab-content">
+        <h2><i class="fas fa-file-alt"></i> Travel Document Tracker</h2>
+        <button class="btn" onclick="showAddDocumentModal()"><i
+            class="fas fa-plus"></i> Add Document</button>
+        <div class="document-tracker" id="documentList"></div>
+      </div>
 
-        <div class="currency-card">
-          <h4><i class="fas fa-info-circle"></i> Today's Rates (1 INR)</h4>
-          <div>USD: $0.012</div>
-          <div>EUR: €0.011</div>
-          <div>GBP: £0.0095</div>
-          <div>JPY: ¥1.70</div>
-          <div>AUD: A$0.018</div>
-          <div>CAD: C$0.016</div>
+      <!-- ===================== Currency Tab ===================== -->
+      <div id="currency" class="tab-content">
+        <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
+        <div class="currency-converter">
+          <div class="converter-grid">
+            <div class="form-group">
+              <label><i class="fas fa-coins"></i> Amount</label>
+              <input type="number" id="currencyAmount" value="1000" />
+            </div>
+            <div style="text-align: center; margin-top: 25px">
+              <i class="fas fa-exchange-alt fa-2x" style="color: #667eea"></i>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-globe"></i> To Currency</label>
+              <select id="toCurrency">
+                <option value="USD">US Dollar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+                <option value="GBP">British Pound (GBP)</option>
+                <option value="JPY">Japanese Yen (JPY)</option>
+                <option value="AUD">Australian Dollar (AUD)</option>
+                <option value="CAD">Canadian Dollar (CAD)</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn" onclick="convertCurrency()"><i
+              class="fas fa-exchange-alt"></i> Convert</button>
+
+          <div class="currency-card">
+            <h4><i class="fas fa-calculator"></i> Conversion Result</h4>
+            <div id="conversionResult">Enter amount and select currency to
+              convert</div>
+          </div>
+
+          <div class="currency-card">
+            <h4><i class="fas fa-info-circle"></i> Today's Rates (1 INR)</h4>
+            <div>USD: $0.012</div>
+            <div>EUR: €0.011</div>
+            <div>GBP: £0.0095</div>
+            <div>JPY: ¥1.70</div>
+            <div>AUD: A$0.018</div>
+            <div>CAD: C$0.016</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- ===================== Add Document Modal ===================== -->
-  <div id="documentModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h3><i class="fas fa-file-medical"></i> Add Travel Document</h3>
-      <div class="form-group">
-        <label><i class="fas fa-file-signature"></i> Document Type</label>
-        <select id="docType">
-          <option value="passport">Passport</option>
-          <option value="visa">Visa</option>
-          <option value="license">Driver's License</option>
-          <option value="insurance">Travel Insurance</option>
-          <option value="vaccination">Vaccination Certificate</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-hashtag"></i> Document Number</label>
-        <input type="text" id="docNumber" />
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-calendar-times"></i> Expiry Date</label>
-        <input type="date" id="docExpiry" />
-      </div>
-      <div style="display: flex; gap: 10px; margin-top: 20px">
-        <button class="btn" onclick="addDocument()"><i class="fas fa-plus"></i> Add Document</button>
-        <button class="btn btn-secondary" onclick="closeModal()"><i class="fas fa-times"></i> Cancel</button>
+    <!-- ===================== Add Document Modal ===================== -->
+    <div id="documentModal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <h3><i class="fas fa-file-medical"></i> Add Travel Document</h3>
+        <div class="form-group">
+          <label><i class="fas fa-file-signature"></i> Document Type</label>
+          <select id="docType">
+            <option value="passport">Passport</option>
+            <option value="visa">Visa</option>
+            <option value="license">Driver's License</option>
+            <option value="insurance">Travel Insurance</option>
+            <option value="vaccination">Vaccination Certificate</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-hashtag"></i> Document Number</label>
+          <input type="text" id="docNumber" />
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-calendar-times"></i> Expiry Date</label>
+          <input type="date" id="docExpiry" />
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 20px">
+          <button class="btn" onclick="addDocument()"><i
+              class="fas fa-plus"></i> Add Document</button>
+          <button class="btn btn-secondary" onclick="closeModal()"><i
+              class="fas fa-times"></i> Cancel</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- ===================== LOGIN MODAL ===================== -->
-  <div id="loginModal" class="modal" style="display:none;">
-    <div class="modal-content" style="max-width:420px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <h3><i class="fas fa-sign-in-alt"></i> Login</h3>
-        <button id="loginClose" class="btn btn-secondary" style="padding:6px 10px;"><i class="fas fa-times"></i></button>
-      </div>
-
-      <form id="loginForm">
-        <div class="form-group">
-          <label><i class="fas fa-envelope"></i> Email</label>
-          <input type="email" id="loginEmail" placeholder="you@example.com" required />
+    <!-- ===================== LOGIN MODAL ===================== -->
+    <div id="loginModal" class="modal" style="display:none;">
+      <div class="modal-content" style="max-width:420px;">
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <h3><i class="fas fa-sign-in-alt"></i> Login</h3>
+          <button id="loginClose" class="btn btn-secondary"
+            style="padding:6px 10px;"><i class="fas fa-times"></i></button>
         </div>
-        <div class="form-group">
-          <label><i class="fas fa-lock"></i> Password</label>
-          <input type="password" id="loginPassword" placeholder="••••••••" required />
-        </div>
-        <button class="btn" type="submit"><i class="fas fa-right-to-bracket"></i> Login</button>
-      </form>
-    </div>
-  </div>
 
-  <!-- ===================== SIGNUP MODAL ===================== -->
-  <div id="signupModal" class="modal" style="display:none;">
-    <div class="modal-content" style="max-width:420px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <h3><i class="fas fa-user-plus"></i> Signup</h3>
-        <button id="signupClose" class="btn btn-secondary" style="padding:6px 10px;"><i class="fas fa-times"></i></button>
-      </div>
-
-      <form id="signupForm">
-        <div class="form-group">
-          <label><i class="fas fa-user"></i> Username</label>
-          <input type="text" id="signupUsername" placeholder="Your name" required />
-        </div>
-        <div class="form-group">
-          <label><i class="fas fa-envelope"></i> Email</label>
-          <input type="email" id="signupEmail" placeholder="you@example.com" required />
-        </div>
-        <div class="form-group">
-          <label><i class="fas fa-lock"></i> Password</label>
-          <input type="password" id="signupPassword" placeholder="••••••••" required />
-        </div>
-        <button class="btn" type="submit"><i class="fas fa-user-plus"></i> Create Account</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Floating Action -->
-  <button class="floating-action" onclick="exportItinerary()"><i class="fas fa-file-download"></i></button>
-
-  <!-- Notification -->
-  <div id="notification" class="notification">
-    <i class="fas fa-check-circle"></i>
-    <span id="notificationText">Notification message</span>
-  </div>
-
-  <footer class="footer">
-    <div class="footer-content">
-      <span>© 2025 WanderWise. Travel smarter.</span>
-      <div class="footer-social">
-        <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="https://facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="mailto:hello@wanderwise.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <form id="loginForm">
+          <div class="form-group">
+            <label><i class="fas fa-envelope"></i> Email</label>
+            <input type="email" id="loginEmail" placeholder="you@example.com"
+              required />
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-lock"></i> Password</label>
+            <input type="password" id="loginPassword" placeholder="••••••••"
+              required />
+          </div>
+          <button class="btn" type="submit"><i
+              class="fas fa-right-to-bracket"></i> Login</button>
+        </form>
       </div>
     </div>
-  </footer>
 
-  <!-- Only ONE script include -->
-  <script src="script.js"></script>
-  <script>
+    <!-- ===================== SIGNUP MODAL ===================== -->
+    <div id="signupModal" class="modal" style="display:none;">
+      <div class="modal-content" style="max-width:420px;">
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <h3><i class="fas fa-user-plus"></i> Signup</h3>
+          <button id="signupClose" class="btn btn-secondary"
+            style="padding:6px 10px;"><i class="fas fa-times"></i></button>
+        </div>
+
+        <form id="signupForm">
+          <div class="form-group">
+            <label><i class="fas fa-user"></i> Username</label>
+            <input type="text" id="signupUsername" placeholder="Your name"
+              required />
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-envelope"></i> Email</label>
+            <input type="email" id="signupEmail" placeholder="you@example.com"
+              required />
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-lock"></i> Password</label>
+            <input type="password" id="signupPassword" placeholder="••••••••"
+              required />
+          </div>
+          <button class="btn" type="submit"><i class="fas fa-user-plus"></i>
+            Create Account</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Floating Action -->
+    <button class="floating-action" onclick="exportItinerary()"><i
+        class="fas fa-file-download"></i></button>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+      <i class="fas fa-check-circle"></i>
+      <span id="notificationText">Notification message</span>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <span>© 2025 WanderWise. Travel smarter.</span>
+        <div class="footer-social">
+          <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><i
+              class="fab fa-twitter"></i></a>
+          <a href="https://facebook.com/" target="_blank"
+            aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com/" target="_blank"
+            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="mailto:hello@wanderwise.com" aria-label="Email"><i
+              class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Only ONE script include -->
+    <script src="script.js"></script>
+    <script>
   // change this when you deploy
   window.AUTH_API_BASE = "http://localhost:5000";
 </script>
-<script src="auth.js"></script>
+    <script src="auth.js"></script>
 
-</body>
+  </body>
 </html>
