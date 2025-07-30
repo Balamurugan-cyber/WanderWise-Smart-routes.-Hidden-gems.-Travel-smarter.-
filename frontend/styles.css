@@ -559,7 +559,7 @@ body {
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             gap: 20px;
-            align-items: end;
+            align-items: center;
             margin-bottom: 20px;
         }
 
@@ -683,10 +683,11 @@ body {
             
             .converter-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
-            
-            .converter-grid > div:not(:first-child) {
-                display: none;
+
+            .converter-grid i {
+                transform: rotate(90deg);
             }
             
             .stat-card {
@@ -1096,4 +1097,26 @@ body {
 .auth-actions {
   position: relative;
   z-index: 10; /* Lower than modal */
+}
+
+.fromCurrency, .toCurrency {
+    display: flex;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.currency-converter .form-group input {
+    height: 4.5rem;
+    font-size: 1.2rem;
+}
+
+#fromCurrency, #toCurrency {
+    border: none;
+}
+
+.currency-card .amount {
+    font-size: 1.5rem;
+    font-weight: 500;
 }

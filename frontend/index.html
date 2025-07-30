@@ -182,34 +182,38 @@
     <div id="currency" class="tab-content">
       <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
       <div class="currency-converter">
+        <div class="form-group">
+            <label><i class="fas fa-coins"></i> Amount</label>
+            <input type="number" id="currencyAmount" value="1" />
+          </div>
         <div class="converter-grid">
           <div class="form-group">
-            <label><i class="fas fa-coins"></i> Amount</label>
-            <input type="number" id="currencyAmount" value="1000" />
+            <label><i class="fas fa-globe"></i>From Currency</label>
+            <div class="fromCurrency">
+              <img src="https://flagsapi.com/US/flat/64.png">
+              <select id="fromCurrency"></select>
+            </div>
           </div>
           <div style="text-align: center; margin-top: 25px">
             <i class="fas fa-exchange-alt fa-2x" style="color: #667eea"></i>
           </div>
           <div class="form-group">
             <label><i class="fas fa-globe"></i> To Currency</label>
-            <select id="toCurrency">
-              <option value="USD">US Dollar (USD)</option>
-              <option value="EUR">Euro (EUR)</option>
-              <option value="GBP">British Pound (GBP)</option>
-              <option value="JPY">Japanese Yen (JPY)</option>
-              <option value="AUD">Australian Dollar (AUD)</option>
-              <option value="CAD">Canadian Dollar (CAD)</option>
-            </select>
+            <div class="toCurrency">
+              <img src="https://flagsapi.com/IN/flat/64.png">
+              <select id="toCurrency"></select>
+            </div>
           </div>
         </div>
-        <button class="btn" onclick="convertCurrency()"><i class="fas fa-exchange-alt"></i> Convert</button>
+        <button class="form-btn btn"><i class="fas fa-exchange-alt"></i> Convert</button>
 
         <div class="currency-card">
           <h4><i class="fas fa-calculator"></i> Conversion Result</h4>
           <div id="conversionResult">Enter amount and select currency to convert</div>
+          <div class="amount"></div>
         </div>
 
-        <div class="currency-card">
+        <!-- <div class="currency-card">
           <h4><i class="fas fa-info-circle"></i> Today's Rates (1 INR)</h4>
           <div>USD: $0.012</div>
           <div>EUR: €0.011</div>
@@ -217,7 +221,7 @@
           <div>JPY: ¥1.70</div>
           <div>AUD: A$0.018</div>
           <div>CAD: C$0.016</div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -321,8 +325,10 @@
     </div>
   </footer>
 
-  <!-- Only ONE script include -->
   <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.11.0/dist/axios.min.js"></script>
+  <script src="codes.js"></script>
+  <script src="app.js"></script>
   <script>
   // change this when you deploy
   window.AUTH_API_BASE = "http://localhost:5000";
