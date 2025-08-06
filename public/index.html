@@ -85,7 +85,7 @@
         </div>
 
         <!-- Smart Routes Tab -->
-        <div id="routes" class="tab-content">
+        <div id="routes" class="tab-content active">
             <h2><i class="fas fa-route"></i> Smart Route Planning</h2>
             <div class="grid">
                 <div class="form-group">
@@ -103,7 +103,7 @@
         </div>
 
         <!-- Checklist Tab -->
-        <div id="checklist" class="tab-content">
+        <div id="checklist" class="tab-content active">
             <h2><i class="fas fa-check-circle"></i> Trip Preparation Checklist</h2>
             <div class="grid">
                 <div class="card">
@@ -119,6 +119,8 @@
                     <div class="checklist" id="dayBefore"></div>
                 </div>
             </div>
+            <!-- Button for adding new tasks -->
+            <button class="btn" onclick="showAddTaskModal()"><i class="fas fa-plus"></i> Add New Task</button>
             <div style="margin-top: 20px;">
                 <h3><i class="fas fa-tasks"></i> Progress</h3>
                 <div class="progress-bar">
@@ -129,7 +131,7 @@
         </div>
 
         <!-- Packing Tab -->
-        <div id="packing" class="tab-content">
+        <div id="packing" class="tab-content active">
             <h2><i class="fas fa-suitcase"></i> Smart Packing Assistant</h2>
             <div class="form-group">
                 <label><i class="fas fa-suitcase-rolling"></i> Trip Type</label>
@@ -164,34 +166,14 @@
         </div>
 
         <!-- Documents Tab -->
-        <div id="documents" class="tab-content">
+        <div id="documents" class="tab-content active">
             <h2><i class="fas fa-file-alt"></i> Travel Document Tracker</h2>
             <button class="btn" onclick="showAddDocumentModal()"><i class="fas fa-plus"></i> Add Document</button>
             <div class="document-tracker" id="documentList"></div>
         </div>
-        <!-- New Gallery Tab -->
-        <div id="gallery" class="tab-content active">
-            <h2><i class="fas fa-images"></i> World Gallery</h2>
-            <p class="subtitle">Discover the most breathtaking destinations around the globe</p>
-            
-            <div class="gallery-search">
-                <input type="text" id="searchGallery" placeholder="Search destinations...">
-                <i class="fas fa-search"></i>
-            </div>
-            
-            <div class="gallery-filter">
-                <button class="filter-btn active" data-filter="all">All Destinations</button>
-                <button class="filter-btn" data-filter="europe">Europe</button>
-                <button class="filter-btn" data-filter="asia">Asia</button>
-                <button class="filter-btn" data-filter="americas">Americas</button>
-                <button class="filter-btn" data-filter="africa">Africa</button>
-                <button class="filter-btn" data-filter="oceania">Oceania</button>
-            </div>
-            
-            <div id="gallery-container" class="gallery-grid"></div>
 
         <!-- Currency Tab -->
-        <div id="currency" class="tab-content">
+        <div id="currency" class="tab-content active">
             <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
             <div class="currency-converter">
                 <div class="converter-grid">
@@ -244,8 +226,53 @@
                 </div>
             </div>
         </div>
-    </div>
-                
+
+
+        <!-- New Gallery Tab -->
+        <div id="gallery" class="tab-content active">
+            <h2><i class="fas fa-images"></i> World Gallery</h2>
+            <p class="subtitle">Discover the most breathtaking destinations around the globe</p>
+            
+            <div class="gallery-search">
+                <input type="text" id="searchGallery" placeholder="Search destinations...">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all">All Destinations</button>
+                <button class="filter-btn" data-filter="europe">Europe</button>
+                <button class="filter-btn" data-filter="asia">Asia</button>
+                <button class="filter-btn" data-filter="americas">Americas</button>
+                <button class="filter-btn" data-filter="africa">Africa</button>
+                <button class="filter-btn" data-filter="oceania">Oceania</button>
+            </div>
+            
+            <div id="gallery-container" class="gallery-grid"></div>
+
+    
+    <!-- Add New Task Modal -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-plus-circle"></i> Add New Task</h3>
+            <div class="form-group">
+                <label><i class="fas fa-clipboard-list"></i> Task Category</label>
+                <select id="taskCategory">
+                    <option value="dayBefore">Day Before</option>
+                    <option value="oneWeek">1 Week Before</option>
+                    <option value="preTrip">Pre-Trip (2-4 weeks before)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-hashtag"></i> Task Description</label>
+                <input type="text" id="itemText">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn" onclick="addTask()"><i class="fas fa-plus"></i> Add New Task</button>
+                <button class="btn btn-secondary" onclick="closeTaskModal()"><i class="fas fa-times"></i> Cancel</button>
+            </div>
+        </div>
+    </div>        
+
     <!-- Add Document Modal -->
     <div id="documentModal" class="modal">
         <div class="modal-content">

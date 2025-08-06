@@ -171,27 +171,6 @@
             showNotification('Route found!');
         }
 
-        // Checklist functionality
-        function setupChecklist() {
-            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
-            
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', updateProgress);
-            });
-            
-            updateProgress();
-        }
-        
-        function updateProgress() {
-            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
-            const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
-            const totalCount = checkboxes.length;
-            const percentage = Math.round((checkedCount / totalCount) * 100);
-            
-            document.getElementById('progressFill').style.width = `${percentage}%`;
-            document.getElementById('progressText').textContent = `${percentage}% Complete`;
-        }
-
         // Packing list functionality
         function generatePackingList() {
             const tripType = document.getElementById('tripType').value;
@@ -485,44 +464,60 @@
             // Generate initial packing list
             generatePackingList();
         });
-        const checklistData = {
+
+        // Checklist functionality
+
+        // Default checklist values
+        let defaultChecklistData = {
     preTrip: [
-        "Book flights and accommodation",
-        "Check passport validity",
-        "Apply for visa (if needed)",
-        "Buy travel insurance",
-        "Arrange pet/house care",
-        "Notify bank of travel"
+        { text: "Book flights and accommodation", checked: false },
+        { text: "Check passport validity", checked: false },
+        { text: "Apply for visa (if needed)", checked: false },
+        { text: "Buy travel insurance", checked: false },
+        { text: "Arrange pet/house care", checked: false },
+        { text: "Notify bank of travel", checked: false }
     ],
     oneWeek: [
-        "Print tickets and confirmations",
-        "Check weather forecast",
-        "Buy local currency",
-        "Pack essentials",
-        "Download offline maps"
+        { text: "Print tickets and confirmations", checked: false },
+        { text: "Check weather forecast", checked: false },
+        { text: "Buy local currency", checked: false },
+        { text: "Pack essentials", checked: false },
+        { text: "Download offline maps", checked: false }
     ],
     dayBefore: [
-        "Charge devices",
-        "Set out travel clothes",
-        "Prepare snacks",
-        "Confirm transport to airport/station",
-        "Check-in online"
+        { text: "Charge devices", checked: false },
+        { text: "Set out travel clothes", checked: false },
+        { text: "Prepare snacks", checked: false },
+        { text: "Confirm transport to airport/station", checked: false },
+        { text: "Check-in online", checked: false }
     ]
 };
 
+let checklistData;
+
 // Render checklist
 function renderChecklist() {
+    const savedData=localStorage.getItem("tripChecklistData");
+    if (savedData) {
+        // If data exists, use it
+        checklistData = JSON.parse(savedData);
+    } else {
+        // If no data exists (first-time use), use default and save it
+        checklistData = JSON.parse(JSON.stringify(defaultChecklistData)); // Deep copy
+        localStorage.setItem('tripChecklistData', JSON.stringify(checklistData));
+    }
     Object.keys(checklistData).forEach(section => {
         const container = document.getElementById(section);
         if (!container) return;
         container.innerHTML = '';
         checklistData[section].forEach((item, idx) => {
             const id = `${section}-item-${idx}`;
-            const checked = localStorage.getItem(id) === 'true';
+            const checked = item.checked ? 'checked' : '';
             container.innerHTML += `
                 <label class="checklist-item">
-                    <input type="checkbox" id="${id}" ${checked ? 'checked' : ''} onchange="toggleChecklist('${id}')">
-                    ${item}
+                    <input type="checkbox" id="${id}" ${checked} onchange="toggleChecklist('${id}')">
+                    <span id="checklist-task">${item.text}</span>
+                    <span class="delete-btn" onclick="deleteTask('${id}')"><i class="fas fa-times"></i></span>
                 </label>
             `;
         });
@@ -530,25 +525,100 @@ function renderChecklist() {
     updateChecklistProgress();
 }
 
-// Handle checklist toggle
-function toggleChecklist(id) {
-    const checkbox = document.getElementById(id);
-    localStorage.setItem(id, checkbox.checked);
-    updateChecklistProgress();
+// Handle toggle logic
+function toggleChecklist(idToToggle) {
+    let taskFound = false;
+    Object.keys(checklistData).forEach(category => {
+        const taskIndex = checklistData[category].findIndex((item, idx) => {
+            const taskId = `${category}-item-${idx}`;
+            return taskId === idToToggle;
+        });
+
+        if (taskIndex > -1) {
+            checklistData[category][taskIndex].checked = !checklistData[category][taskIndex].checked;
+            taskFound = true;
+            return;
+        }
+    });
+
+    if (taskFound) {
+        localStorage.setItem('tripChecklistData', JSON.stringify(checklistData));
+        renderChecklist();
+    }
 }
 
 // Update progress bar
 function updateChecklistProgress() {
-    const allIds = [];
-    Object.keys(checklistData).forEach(section => {
-        checklistData[section].forEach((_, idx) => {
-            allIds.push(`${section}-item-${idx}`);
-        });
+    let totalTasks = 0;
+    let completedTasks = 0;
+
+    Object.keys(checklistData).forEach(category => {
+        totalTasks += checklistData[category].length;
+        completedTasks += checklistData[category].filter(item => item.checked).length;
     });
-    const checked = allIds.filter(id => localStorage.getItem(id) === 'true').length;
-    const percent = Math.round((checked / allIds.length) * 100);
+    
+    let percent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+    
     document.getElementById('progressFill').style.width = percent + '%';
     document.getElementById('progressText').textContent = `${percent}% Complete`;
+}
+
+// Add Task Modal Functionality
+function showAddTaskModal() {
+    document.getElementById('taskModal').style.display = 'flex';
+}
+
+function closeTaskModal() {
+    document.getElementById('taskModal').style.display = 'none';
+}
+
+function addTask() {
+    const category = document.getElementById('taskCategory').value;
+    const itemText = document.getElementById('itemText').value.trim();
+            
+    if (!itemText) {
+        showNotification('Please fill all the fields');
+        return;
+    }
+    addNewChecklistItem(category,itemText);
+    document.querySelector("#itemText").value="";
+    document.querySelector("#taskCategory").value="dayBefore";
+    closeTaskModal();
+    renderChecklist();
+    showNotification('Task added successfully!');
+}
+
+// Add new checklist item
+function addNewChecklistItem(category,itemText){
+    if(checklistData[category]){
+        checklistData[category].push({text:itemText,checked:false});
+        // Adding it to local storage to make it persistent
+        localStorage.setItem('tripChecklistData', JSON.stringify(checklistData));
+    }
+    else{
+        console.error(`Category "${category}" not found in checklist`);
+    }
+}
+
+// Deletes tasks
+function deleteTask(idToDelete) {
+    let taskFound = false;
+    Object.keys(checklistData).forEach(category => {
+        const taskIndex = checklistData[category].findIndex((item, idx) => {
+            const taskId = `${category}-item-${idx}`;
+            return taskId === idToDelete;
+        });
+        if (taskIndex > -1) {
+            checklistData[category].splice(taskIndex, 1);
+            taskFound = true;
+            return; 
+        }
+    });
+    if (taskFound) {
+        localStorage.setItem('tripChecklistData', JSON.stringify(checklistData));
+        renderChecklist();
+        showNotification('Task deleted successfully!');
+    }
 }
 
 // Initialize on page load
