@@ -534,7 +534,10 @@ function updateChecklistProgress() {
         });
     });
     const checked = allIds.filter(id => localStorage.getItem(id) === 'true').length;
-    const percent = Math.round((checked / allIds.length) * 100);
+    let percent = Math.round((checked / allIds.length) * 100);
+    if(allIds.length===0){
+        percent=0;
+    }
     document.getElementById('progressFill').style.width = percent + '%';
     document.getElementById('progressText').textContent = `${percent}% Complete`;
 }
