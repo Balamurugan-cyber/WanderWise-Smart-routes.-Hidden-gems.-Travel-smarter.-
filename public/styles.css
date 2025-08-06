@@ -411,6 +411,10 @@
             border-bottom: 1px solid var(--bg-tertiary);
         }
 
+        #checklist-task{
+            padding:10px;
+        }
+
         /* Delete Task Button */
         .delete-btn {
             display: none;
@@ -437,7 +441,7 @@
         }
 
         .checklist-item input[type="checkbox"] {
-            margin-top: 4px;
+            margin-top: 12px;
             margin-right: 12px;
             margin-bottom: 5px;
             width: 18px;
