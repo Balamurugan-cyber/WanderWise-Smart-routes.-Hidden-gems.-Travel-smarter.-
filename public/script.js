@@ -509,7 +509,8 @@ function renderChecklist() {
             container.innerHTML += `
                 <label class="checklist-item">
                     <input type="checkbox" id="${id}" ${checked ? 'checked' : ''} onchange="toggleChecklist('${id}')">
-                    ${item}
+                    <span id="checklist-task">${item}</span>
+                    <span class="delete-btn" onclick="deleteTask('${id}')"><i class="fas fa-times"></i></span>
                 </label>
             `;
         });
@@ -557,6 +558,7 @@ function addTask() {
     }
     addNewChecklistItem(category,itemText);
     document.querySelector("#itemText").value="";
+    document.querySelector("#taskCategory").value="dayBefore";
     closeTaskModal();
     renderChecklist();
     showNotification('Task added successfully!');
@@ -571,6 +573,27 @@ function addNewChecklistItem(category,itemText){
     }
     else{
         console.error(`Category "${category}" not found in checklist`);
+    }
+}
+
+// Deletes tasks
+function deleteTask(idToDelete) {
+    let taskFound = false;
+    Object.keys(checklistData).forEach(category => {
+        const taskIndex = checklistData[category].findIndex((item, idx) => {
+            const taskId = `${category}-item-${idx}`;
+            return taskId === idToDelete;
+        });
+        if (taskIndex > -1) {
+            checklistData[category].splice(taskIndex, 1);
+            taskFound = true;
+            return; 
+        }
+    });
+    if (taskFound) {
+        localStorage.setItem('tripChecklistData', JSON.stringify(checklistData));
+        renderChecklist();
+        showNotification('Task deleted successfully!');
     }
 }
 
