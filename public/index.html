@@ -119,6 +119,8 @@
                     <div class="checklist" id="dayBefore"></div>
                 </div>
             </div>
+            <!-- Button for adding new tasks -->
+            <button class="btn" onclick="showAddTaskModal()"><i class="fas fa-plus"></i> Add New Task</button>
             <div style="margin-top: 20px;">
                 <h3><i class="fas fa-tasks"></i> Progress</h3>
                 <div class="progress-bar">
@@ -247,7 +249,30 @@
             
             <div id="gallery-container" class="gallery-grid"></div>
 
-                
+    
+    <!-- Add New Task Modal -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-file-medical"></i> Add New Task</h3>
+            <div class="form-group">
+                <label><i class="fas fa-file-signature"></i> Task Category</label>
+                <select id="taskCategory">
+                    <option value="dayBefore">Day Before</option>
+                    <option value="oneWeek">1 Week Before</option>
+                    <option value="preTrip">Pre-Trip (2-4 weeks before)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-hashtag"></i> Task Description</label>
+                <input type="text" id="itemText">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn" onclick="addTask()"><i class="fas fa-plus"></i> Add New Task</button>
+                <button class="btn btn-secondary" onclick="closeTaskModal()"><i class="fas fa-times"></i> Cancel</button>
+            </div>
+        </div>
+    </div>        
+
     <!-- Add Document Modal -->
     <div id="documentModal" class="modal">
         <div class="modal-content">

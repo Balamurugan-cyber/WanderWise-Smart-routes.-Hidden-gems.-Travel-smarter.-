@@ -171,27 +171,6 @@
             showNotification('Route found!');
         }
 
-        // Checklist functionality
-        function setupChecklist() {
-            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
-            
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', updateProgress);
-            });
-            
-            updateProgress();
-        }
-        
-        function updateProgress() {
-            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
-            const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
-            const totalCount = checkboxes.length;
-            const percentage = Math.round((checkedCount / totalCount) * 100);
-            
-            document.getElementById('progressFill').style.width = `${percentage}%`;
-            document.getElementById('progressText').textContent = `${percentage}% Complete`;
-        }
-
         // Packing list functionality
         function generatePackingList() {
             const tripType = document.getElementById('tripType').value;
@@ -485,7 +464,11 @@
             // Generate initial packing list
             generatePackingList();
         });
-        const checklistData = {
+
+        // Checklist functionality
+
+        // Default checklist values
+        let checklistData = {
     preTrip: [
         "Book flights and accommodation",
         "Check passport validity",
@@ -512,6 +495,10 @@
 
 // Render checklist
 function renderChecklist() {
+    const savedData=localStorage.getItem("tripChecklistData");
+    if(savedData){
+        checklistData=JSON.parse(savedData);
+    }
     Object.keys(checklistData).forEach(section => {
         const container = document.getElementById(section);
         if (!container) return;
@@ -549,6 +536,42 @@ function updateChecklistProgress() {
     const percent = Math.round((checked / allIds.length) * 100);
     document.getElementById('progressFill').style.width = percent + '%';
     document.getElementById('progressText').textContent = `${percent}% Complete`;
+}
+
+// Add Task Modal Functionality
+function showAddTaskModal() {
+    document.getElementById('taskModal').style.display = 'flex';
+}
+
+function closeTaskModal() {
+    document.getElementById('taskModal').style.display = 'none';
+}
+
+function addTask() {
+    const category = document.getElementById('taskCategory').value;
+    const itemText = document.getElementById('itemText').value.trim();
+            
+    if (!itemText) {
+        showNotification('Please fill all the fields');
+        return;
+    }
+    addNewChecklistItem(category,itemText);
+    document.querySelector("#itemText").value="";
+    closeTaskModal();
+    renderChecklist();
+    showNotification('Task added successfully!');
+}
+
+// Add new checklist item
+function addNewChecklistItem(category,itemText){
+    if(checklistData[category]){
+        checklistData[category].push(itemText);
+        // Adding it to local storage to make it persistent
+        localStorage.setItem('tripChecklistData', JSON.stringify(checklistData));
+    }
+    else{
+        console.error(`Category "${category}" not found in checklist`);
+    }
 }
 
 // Initialize on page load
