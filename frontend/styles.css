@@ -674,11 +674,11 @@ body {
 
 /* Currency converter */
 .converter-grid {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 20px;
-  align-items: end;
-  margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .currency-card {
@@ -803,27 +803,28 @@ body {
   bottom: 30px;
 }
 
-/* Responsive design */
+        /* Responsive design */
 @media (max-width: 768px) {
-  .tabs {
-    flex-direction: column;
-  }
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .converter-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 
-  .converter-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .converter-grid > div:not(:first-child) {
-    display: none;
-  }
-
-  .stat-card {
-    min-width: calc(50% - 20px);
-  }
-
-  .header h1 {
-    font-size: 2rem;
-  }
+    .converter-grid i {
+        transform: rotate(90deg);
+    }
+    
+    .stat-card {
+        min-width: calc(50% - 20px);
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1338,6 +1339,27 @@ body {
   z-index: 10; /* Lower than modal */
 }
 
+.fromCurrency, .toCurrency {
+    display: flex;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.currency-converter .form-group input {
+    height: 4.5rem;
+    font-size: 1.2rem;
+}
+
+#fromCurrency, #toCurrency {
+    border: none;
+}
+
+.currency-card .amount {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
 /* -------------------- Emergency Page Styles -------------------- */
 
 #emergency h2 {
@@ -1389,4 +1411,26 @@ body {
   gap: 10px;
   margin: 40px 0 20px;
   color: var(--accent-primary);
+}
+
+.fromCurrency, .toCurrency {
+    display: flex;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.currency-converter .form-group input {
+    height: 4.5rem;
+    font-size: 1.2rem;
+}
+
+#fromCurrency, #toCurrency {
+    border: none;
+}
+
+.currency-card .amount {
+    font-size: 1.5rem;
+    font-weight: 500;
 }

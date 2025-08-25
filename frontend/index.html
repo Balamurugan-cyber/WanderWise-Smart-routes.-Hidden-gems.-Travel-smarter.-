@@ -193,128 +193,93 @@
             <div class="document-tracker" id="documentList"></div>
         </div>
 
-        <div id="currency" class="tab-content">
-            <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
-            <div class="currency-converter">
-                <div class="converter-grid">
-                    <div class="form-group">
-                        <label><i class="fas fa-coins"></i> Amount (INR)</label>
-                        <input type="number" id="currencyAmount" value="1000" />
-                    </div>
-                    <div style="text-align: center; margin-top: 25px">
-                        <i class="fas fa-exchange-alt fa-2x" style="color: #667eea"></i>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-globe"></i> To Currency</label>
-                        <select id="toCurrency">
-                            <option value="USD">US Dollar (USD)</option>
-                            <option value="EUR">Euro (EUR)</option>
-                            <option value="GBP">British Pound (GBP)</option>
-                            <option value="JPY">Japanese Yen (JPY)</option>
-                            <option value="AUD">Australian Dollar (AUD)</option>
-                            <option value="CAD">Canadian Dollar (CAD)</option>
-                        </select>
-                    </div>
-                </div>
-                <button class="btn" onclick="convertCurrency()"><i class="fas fa-exchange-alt"></i> Convert</button>
+    <!-- ===================== CURRENCY TAB ===================== -->
+    <div id="currency" class="tab-content">
+      <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
+      <div class="currency-converter">
+        <div class="form-group">
+            <label><i class="fas fa-coins"></i> Amount</label>
+            <input type="number" id="currencyAmount" value="1" />
+          </div>
+        <div class="converter-grid">
+          <div class="form-group">
+            <label><i class="fas fa-globe"></i>From Currency</label>
+            <div class="fromCurrency">
+              <img src="https://flagsapi.com/US/flat/64.png">
+              <select id="fromCurrency"></select>
+            </div>
+          </div>
+          <div style="text-align: center; margin-top: 25px">
+            <i class="fas fa-exchange-alt fa-2x" style="color: #667eea"></i>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-globe"></i> To Currency</label>
+            <div class="toCurrency">
+              <img src="https://flagsapi.com/IN/flat/64.png">
+              <select id="toCurrency"></select>
+            </div>
+          </div>
+        </div>
+        <button class="form-btn btn"><i class="fas fa-exchange-alt"></i> Convert</button>
 
                 <div class="currency-card">
                     <h4><i class="fas fa-calculator"></i> Conversion Result</h4>
                     <div id="conversionResult">Enter amount and select currency to convert</div>
-                </div>
-
-                <div class="currency-card">
-                    <h4><i class="fas fa-info-circle"></i> Today's Rates (1 INR)</h4>
-                    <div>USD: $0.012</div>
-                    <div>EUR: €0.011</div>
-                    <div>GBP: £0.0095</div>
-                    <div>JPY: ¥1.70</div>
-                    <div>AUD: A$0.018</div>
-                    <div>CAD: C$0.016</div>
-                </div>
-            </div>
-        </div>
-        
-        <div id="emergency" class="tab-content">
-            <h2><i class="fas fa-kit-medical"></i> Emergency Contacts</h2>
-            <p>Quickly find emergency numbers for police, ambulance, and fire services, as well as embassy information for your destination. Always verify these numbers with local authorities.</p>
-            
-            <div class="form-group">
-                <label for="countrySearch"><i class="fas fa-search"></i> Search by Country</label>
-                <input type="text" id="countrySearch" placeholder="e.g., France, Japan, USA" onkeyup="filterEmergencyContacts()">
-            </div>
-
-            <div class="grid" id="emergencyContactsList">
-                <div class="card contact-card" data-country="india">
-                    <h3><i class="fas fa-flag"></i> India 🇮🇳</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-user-shield"></i>
-                        <span>Police:</span> <strong>100</strong>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-ambulance"></i>
-                        <span>Ambulance:</span> <strong>108</strong>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-fire-extinguisher"></i>
-                        <span>Fire:</span> <strong>101</strong>
-                    </div>
-                </div>
-
-                <div class="card contact-card" data-country="united-states">
-                    <h3><i class="fas fa-flag"></i> United States 🇺🇸</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-phone-volume"></i>
-                        <span>Emergency Services:</span> <strong>911</strong>
-                    </div>
-                    <div class="disclaimer" style="font-size: 0.9em; margin-top: 5px; color: #888;">*911 connects to Police, Fire, and Ambulance.</div>
-                </div>
-
-                <div class="card contact-card" data-country="united-kingdom">
-                    <h3><i class="fas fa-flag"></i> United Kingdom 🇬🇧</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-phone-volume"></i>
-                        <span>Emergency Services:</span> <strong>999</strong>
-                    </div>
-                    <div class="disclaimer" style="font-size: 0.9em; margin-top: 5px; color: #888;">*999 connects to Police, Fire, and Ambulance.</div>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 40px;"><i class="fas fa-passport"></i> Embassy and Consulate Contacts</h3>
-            <p>For citizens traveling abroad, here are key contacts for consular assistance. Contact details may vary by city.</p>
-            <div class="grid">
-                <div class="card">
-                    <h4><i class="fas fa-globe"></i> U.S. Embassy in India</h4>
-                    <p><strong>Website:</strong> <a href="https://in.usembassy.gov" target="_blank">in.usembassy.gov</a></p>
-                    <p><strong>Phone:</strong> +91-11-2419-8000</p>
-                </div>
-                <div class="card">
-                    <h4><i class="fas fa-globe"></i> British High Commission in India</h4>
-                    <p><strong>Website:</strong> <a href="https://www.gov.uk/world/india--high-commission" target="_blank">gov.uk/india</a></p>
-                    <p><strong>Phone:</strong> +91 11 2419 2100</p>
-                </div>
-            </div>
-
+                  <div class="amount"></div>
         </div>
 
-        <div id="gallery" class="tab-content">
-            <h2><i class="fas fa-images"></i> Destination Gallery</h2>
-            <div class="gallery-search">
-                <input type="text" id="searchGalleryInput" placeholder="Search destinations...">
-                <i class="fas fa-search"></i>
-            </div>
-            <div class="gallery-filter">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="europe">Europe</button>
-                <button class="filter-btn" data-filter="asia">Asia</button>
-                <button class="filter-btn" data-filter="americas">Americas</button>
-                <button class="filter-btn" data-filter="africa">Africa</button>
-                <button class="filter-btn" data-filter="oceania">Oceania</button>
-            </div>
-            <div id="gallery-container" class="gallery-grid">
-                </div>
-        </div>
+        <!-- <div class="currency-card">
+          <h4><i class="fas fa-info-circle"></i> Today's Rates (1 INR)</h4>
+          <div>USD: $0.012</div>
+          <div>EUR: €0.011</div>
+          <div>GBP: £0.0095</div>
+          <div>JPY: ¥1.70</div>
+          <div>AUD: A$0.018</div>
+          <div>CAD: C$0.016</div>
+        </div> -->
+      </div>
     </div>
+
+    <!-- ===================== GALLERY TAB ===================== -->
+    <div id="gallery" class="tab-content">
+      <h2><i class="fas fa-images"></i> Destination Gallery</h2>
+      <div class="gallery-search">
+        <input type="text" id="searchGalleryInput" placeholder="Search destinations...">
+        <i class="fas fa-search"></i>
+      </div>
+      <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="europe">Europe</button>
+        <button class="filter-btn" data-filter="asia">Asia</button>
+        <button class="filter-btn" data-filter="americas">Americas</button>
+        <button class="filter-btn" data-filter="africa">Africa</button>
+        <button class="filter-btn" data-filter="oceania">Oceania</button>
+      </div>
+      <div id="gallery-container" class="gallery-grid">
+        <!-- Gallery cards will be generated by script.js -->
+      </div>
+    </div>
+
+    <!-- ===================== GALLERY TAB ===================== -->
+    <div id="gallery" class="tab-content">
+      <h2><i class="fas fa-images"></i> Destination Gallery</h2>
+      <div class="gallery-search">
+        <input type="text" id="searchGalleryInput" placeholder="Search destinations...">
+        <i class="fas fa-search"></i>
+      </div>
+      <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="europe">Europe</button>
+        <button class="filter-btn" data-filter="asia">Asia</button>
+        <button class="filter-btn" data-filter="americas">Americas</button>
+        <button class="filter-btn" data-filter="africa">Africa</button>
+        <button class="filter-btn" data-filter="oceania">Oceania</button>
+      </div>
+      <div id="gallery-container" class="gallery-grid">
+        <!-- Gallery cards will be generated by script.js -->
+      </div>
+    </div>
+  </div>
 
     <div id="documentModal" class="modal" style="display:none;">
         <div class="modal-content">
@@ -430,6 +395,9 @@
     </footer>
 
     <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.11.0/dist/axios.min.js"></script>
+  <script src="codes.js"></script>
+  <script src="app.js"></script>
     <script>
         // This sets the base URL for the authentication backend
         window.AUTH_API_BASE = "http://localhost:5000";
