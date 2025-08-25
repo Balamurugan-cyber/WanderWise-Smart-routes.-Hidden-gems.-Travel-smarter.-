@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Travel Itinerary Planner</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&family=Pacifico&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Travel Itinerary Planner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
@@ -26,360 +26,381 @@
 </div>
 
 
-  <!-- ===================== NAVBAR ===================== -->
-  <nav class="navbar">
-    <a href="#" class="nav-brand">WanderWise</a>
-    <div class="nav-links" id="navLinks">
-      <a href="#itinerary" class="nav-link active" onclick="switchTab('itinerary', this)"><i
-          class="fas fa-calendar-alt"></i>Itinerary</a>
-      <a href="#routes" class="nav-link" onclick="switchTab('routes', this)"><i class="fas fa-route"></i>Routes</a>
-      <a href="#checklist" class="nav-link" onclick="switchTab('checklist', this)"><i
-          class="fas fa-check-circle"></i>Checklist</a>
-      <a href="#packing" class="nav-link" onclick="switchTab('packing', this)"><i
-          class="fas fa-suitcase"></i>Packing</a>
-      <a href="#documents" class="nav-link" onclick="switchTab('documents', this)"><i
-          class="fas fa-file-alt"></i>Docs</a>
-      <a href="#currency" class="nav-link" onclick="switchTab('currency', this)"><i
-          class="fas fa-money-bill-wave"></i>Currency</a>
-      <a href="#gallery" class="nav-link" onclick="switchTab('gallery', this)"><i class="fas fa-images"></i>Gallery</a>
-    </div>
-    <div class="nav-right">
-      <div class="live-clock" id="liveClock"></div>
-      <div id="authHello" style="display:none; align-items:center; gap:6px; margin-right: 10px;">
-        <i class="fas fa-user"></i>
-        <span id="authUserName"></span>
-      </div>
-      <button class="btn btn-secondary" id="loginBtn">Login</button>
-      <button class="btn" id="signupBtn">Signup</button>
-      <button class="btn btn-secondary" id="logoutBtn" style="display:none;">Logout</button>
-    </div>
-    <button class="navbar-hamburger" id="navbarHamburger">
-      <i class="fas fa-bars"></i>
-    </button>
-  </nav>
+    <nav class="navbar">
+        <a href="#" class="nav-brand">WanderWise</a>
+        <div class="nav-links" id="navLinks">
+            <a href="#itinerary" class="nav-link active" onclick="switchTab('itinerary', this)"><i
+                    class="fas fa-calendar-alt"></i>Itinerary</a>
+            <a href="#routes" class="nav-link" onclick="switchTab('routes', this)"><i class="fas fa-route"></i>Routes</a>
+            <a href="#checklist" class="nav-link" onclick="switchTab('checklist', this)"><i
+                    class="fas fa-check-circle"></i>Checklist</a>
+            <a href="#packing" class="nav-link" onclick="switchTab('packing', this)"><i
+                    class="fas fa-suitcase"></i>Packing</a>
+            <a href="#documents" class="nav-link" onclick="switchTab('documents', this)"><i
+                    class="fas fa-file-alt"></i>Docs</a>
+            <a href="#emergency" class="nav-link" onclick="switchTab('emergency', this)"><i
+                    class="fas fa-kit-medical"></i>Emergency</a>
+            <a href="#currency" class="nav-link" onclick="switchTab('currency', this)"><i
+                    class="fas fa-money-bill-wave"></i>Currency</a>
+            <a href="#gallery" class="nav-link" onclick="switchTab('gallery', this)"><i class="fas fa-images"></i>Gallery</a>
+        </div>
+        <div class="nav-right">
+            <div class="live-clock" id="liveClock"></div>
+            <div id="authHello" style="display:none; align-items:center; gap:6px; margin-right: 10px;">
+                <i class="fas fa-user"></i>
+                <span id="authUserName"></span>
+            </div>
+            <button class="btn btn-secondary" id="loginBtn">Login</button>
+            <button class="btn" id="signupBtn">Signup</button>
+            <button class="btn btn-secondary" id="logoutBtn" style="display:none;">Logout</button>
+        </div>
+        <button class="navbar-hamburger" id="navbarHamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
 
-  <!-- ===================== MAIN CONTAINER ===================== -->
-  <div class="container">
-    <div class="header">
-      <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-      </button>
-      <h1><i class="fas fa-globe-americas"></i> Smart Travel Planner</h1>
-      <p>Plan your perfect trip with intelligent routing and comprehensive preparation tools</p>
-    </div>
-
-    <div class="info-box" style="background-color: rgba(67, 97, 238, 0.2);">
-      <div>
-        <h3 style="font-size: 22px; color: rgb(5, 23, 104)">About Us</h3>
-        <p style="font-size:18px;">Your trip, your way.</p>
-        <p>We turn chaos into clarity with tools that make planning effortless and travel unforgettable. From smart
-          suggestions to optimized routes, we help you craft every detail with ease. Whether it’s a quick getaway or a
-          dream vacation, we’re here to make your journey smoother, smarter, and truly yours.</p>
-      </div>
-    </div>
-
-    <!-- ===================== ITINERARY TAB ===================== -->
-    <div id="itinerary" class="tab-content active">
-      <h2><i class="fas fa-calendar-alt"></i> Travel Itinerary</h2>
-      <div class="trip-stats">
-        <div class="stat-card">
-          <div class="value" id="tripDays">0</div>
-          <div class="label">Days</div>
-        </div>
-        <div class="stat-card">
-          <div class="value" id="tripActivities">0</div>
-          <div class="label">Activities</div>
-        </div>
-        <div class="stat-card">
-          <div class="value" id="tripBudget">₹0</div>
-          <div class="label">Estimated Budget</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-map-marker-alt"></i> Destination</label>
-        <input type="text" id="destination" placeholder="e.g., Paris, France" />
-      </div>
-      <div class="grid">
-        <div class="form-group">
-          <label><i class="fas fa-calendar-day"></i> Start Date</label>
-          <input type="date" id="startDate" />
-        </div>
-        <div class="form-group">
-          <label><i class="fas fa-calendar-day"></i> End Date</label>
-          <input type="date" id="endDate" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label><i class="fas fa-plus-circle"></i> Add Activity</label>
-        <input type="text" id="activityName" placeholder="Activity name, e.g., Visit the Louvre" />
-        <input type="time" id="activityTime" style="margin-top: 10px" />
-        <input type="text" id="activityLocation" placeholder="Location, e.g., Louvre Museum" style="margin-top: 10px" />
-        <input type="number" id="activityCost" placeholder="Estimated cost (₹)" style="margin-top: 10px" />
-        <button class="btn" onclick="addItineraryItem()" style="margin-top: 10px"><i class="fas fa-plus"></i>Add
-          Activity</button>
-      </div>
-      <div id="itineraryList"></div>
-    </div>
-
-    <!-- ===================== SMART ROUTES TAB ===================== -->
-    <div id="routes" class="tab-content">
-      <h2><i class="fas fa-route"></i> Smart Route Planning</h2>
-      <div class="grid">
-        <div class="form-group">
-          <label><i class="fas fa-location-arrow"></i> From</label>
-          <input type="text" id="fromLocation" placeholder="Starting location" />
-        </div>
-        <div class="form-group">
-          <label><i class="fas fa-map-marker-alt"></i> To</label>
-          <input type="text" id="toLocation" placeholder="Destination" />
-        </div>
-      </div>
-      <button class="btn" onclick="findRoute()"><i class="fas fa-search"></i> Find Best Route</button>
-      <div id="routeResults" style="margin-top: 20px;"></div>
-    </div>
-
-    <!-- ===================== CHECKLIST TAB ===================== -->
-    <div id="checklist" class="tab-content">
-      <h2><i class="fas fa-check-circle"></i> Trip Preparation Checklist</h2>
-      <div class="grid">
-        <div class="card">
-          <h3><i class="fas fa-clipboard-list"></i> Pre-Trip (2-4 weeks before)</h3>
-          <div class="checklist" id="preTrip"></div>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-calendar-week"></i> 1 Week Before</h3>
-          <div class="checklist" id="oneWeek"></div>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-plane-departure"></i> Day Before</h3>
-          <div class="checklist" id="dayBefore"></div>
-        </div>
-      </div>
-      <div style="margin-top: 20px">
-        <h3><i class="fas fa-tasks"></i> Progress</h3>
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-        </div>
-        <p id="progressText">0% Complete</p>
-      </div>
-    </div>
-
-    <!-- ===================== PACKING TAB ===================== -->
-    <div id="packing" class="tab-content">
-      <h2><i class="fas fa-suitcase"></i> Smart Packing Assistant</h2>
-      <div class="form-group">
-        <label><i class="fas fa-suitcase-rolling"></i> Trip Type</label>
-        <select id="tripType" onchange="generatePackingList()">
-          <option value="">Select trip type</option>
-          <option value="business">Business</option>
-          <option value="leisure">Leisure</option>
-          <option value="adventure">Adventure</option>
-          <option value="beach">Beach</option>
-          <option value="city">City Break</option>
-          <option value="backpacking">Backpacking</option>
-        </select>
-      </div>
-      <div class="grid">
-        <div class="form-group">
-          <label><i class="fas fa-calendar"></i> Duration (days)</label>
-          <input type="number" id="tripDuration" min="1" value="3" onchange="generatePackingList()" />
-        </div>
-        <div class="form-group">
-          <label><i class="fas fa-cloud-sun"></i> Weather</label>
-          <select id="weather" onchange="generatePackingList()">
-            <option value="">Select weather</option>
-            <option value="hot">Hot</option>
-            <option value="warm" selected>Warm</option>
-            <option value="mild">Mild</option>
-            <option value="cold">Cold</option>
-            <option value="mixed">Mixed</option>
-          </select>
-        </div>
-      </div>
-      <div id="packingList"></div>
-    </div>
-
-    <!-- ===================== DOCUMENTS TAB ===================== -->
-    <div id="documents" class="tab-content">
-      <h2><i class="fas fa-file-alt"></i> Travel Document Tracker</h2>
-      <button class="btn" onclick="showAddDocumentModal()"><i class="fas fa-plus"></i> Add Document</button>
-      <div class="document-tracker" id="documentList"></div>
-    </div>
-
-    <!-- ===================== CURRENCY TAB ===================== -->
-    <div id="currency" class="tab-content">
-      <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
-      <div class="currency-converter">
-        <div class="converter-grid">
-          <div class="form-group">
-            <label><i class="fas fa-coins"></i> Amount (INR)</label>
-            <input type="number" id="currencyAmount" value="1000" />
-          </div>
-          <div style="text-align: center; margin-top: 25px">
-            <i class="fas fa-exchange-alt fa-2x" style="color: #667eea"></i>
-          </div>
-          <div class="form-group">
-            <label><i class="fas fa-globe"></i> To Currency</label>
-            <select id="toCurrency">
-              <option value="USD">US Dollar (USD)</option>
-              <option value="EUR">Euro (EUR)</option>
-              <option value="GBP">British Pound (GBP)</option>
-              <option value="JPY">Japanese Yen (JPY)</option>
-              <option value="AUD">Australian Dollar (AUD)</option>
-              <option value="CAD">Canadian Dollar (CAD)</option>
-            </select>
-          </div>
-        </div>
-        <button class="btn" onclick="convertCurrency()"><i class="fas fa-exchange-alt"></i> Convert</button>
-
-        <div class="currency-card">
-          <h4><i class="fas fa-calculator"></i> Conversion Result</h4>
-          <div id="conversionResult">Enter amount and select currency to convert</div>
+    <div class="container">
+        <div class="header">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <h1><i class="fas fa-globe-americas"></i> Smart Travel Planner</h1>
+            <p>Plan your perfect trip with intelligent routing and comprehensive preparation tools</p>
         </div>
 
-        <div class="currency-card">
-          <h4><i class="fas fa-info-circle"></i> Today's Rates (1 INR)</h4>
-          <div>USD: $0.012</div>
-          <div>EUR: €0.011</div>
-          <div>GBP: £0.0095</div>
-          <div>JPY: ¥1.70</div>
-          <div>AUD: A$0.018</div>
-          <div>CAD: C$0.016</div>
+        <div class="info-box" style="background-color: rgba(67, 97, 238, 0.2);">
+            <div>
+                <h3 style="font-size: 22px; color: rgb(5, 23, 104)">About Us</h3>
+                <p style="font-size:18px;">Your trip, your way.</p>
+                <p>We turn chaos into clarity with tools that make planning effortless and travel unforgettable. From
+                    smart
+                    suggestions to optimized routes, we help you craft every detail with ease. Whether it’s a quick
+                    getaway or a
+                    dream vacation, we’re here to make your journey smoother, smarter, and truly yours.</p>
+            </div>
         </div>
-      </div>
+
+        <div id="itinerary" class="tab-content active">
+            <h2><i class="fas fa-calendar-alt"></i> Travel Itinerary</h2>
+            <div class="trip-stats">
+                <div class="stat-card">
+                    <div class="value" id="tripDays">0</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value" id="tripActivities">0</div>
+                    <div class="label">Activities</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value" id="tripBudget">₹0</div>
+                    <div class="label">Estimated Budget</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-map-marker-alt"></i> Destination</label>
+                <input type="text" id="destination" placeholder="e.g., Paris, France" />
+            </div>
+            <div class="grid">
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-day"></i> Start Date</label>
+                    <input type="date" id="startDate" />
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-day"></i> End Date</label>
+                    <input type="date" id="endDate" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-plus-circle"></i> Add Activity</label>
+                <input type="text" id="activityName" placeholder="Activity name, e.g., Visit the Louvre" />
+                <input type="time" id="activityTime" style="margin-top: 10px" />
+                <input type="text" id="activityLocation" placeholder="Location, e.g., Louvre Museum"
+                    style="margin-top: 10px" />
+                <input type="number" id="activityCost" placeholder="Estimated cost (₹)" style="margin-top: 10px" />
+                <button class="btn" onclick="addItineraryItem()" style="margin-top: 10px"><i
+                        class="fas fa-plus"></i>Add
+                    Activity</button>
+            </div>
+            <div id="itineraryList"></div>
+        </div>
+
+        <div id="routes" class="tab-content">
+            <h2><i class="fas fa-route"></i> Smart Route Planning</h2>
+            <div class="grid">
+                <div class="form-group">
+                    <label><i class="fas fa-location-arrow"></i> From</label>
+                    <input type="text" id="fromLocation" placeholder="Starting location" />
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> To</label>
+                    <input type="text" id="toLocation" placeholder="Destination" />
+                </div>
+            </div>
+            <button class="btn" onclick="findRoute()"><i class="fas fa-search"></i> Find Best Route</button>
+            <div id="routeResults" style="margin-top: 20px;"></div>
+        </div>
+
+        <div id="checklist" class="tab-content">
+            <h2><i class="fas fa-check-circle"></i> Trip Preparation Checklist</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fas fa-clipboard-list"></i> Pre-Trip (2-4 weeks before)</h3>
+                    <div class="checklist" id="preTrip"></div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-calendar-week"></i> 1 Week Before</h3>
+                    <div class="checklist" id="oneWeek"></div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-plane-departure"></i> Day Before</h3>
+                    <div class="checklist" id="dayBefore"></div>
+                </div>
+            </div>
+            <div style="margin-top: 20px">
+                <h3><i class="fas fa-tasks"></i> Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <p id="progressText">0% Complete</p>
+            </div>
+        </div>
+
+        <div id="packing" class="tab-content">
+            <h2><i class="fas fa-suitcase"></i> Smart Packing Assistant</h2>
+            <div class="form-group">
+                <label><i class="fas fa-suitcase-rolling"></i> Trip Type</label>
+                <select id="tripType" onchange="generatePackingList()">
+                    <option value="">Select trip type</option>
+                    <option value="business">Business</option>
+                    <option value="leisure">Leisure</option>
+                    <option value="adventure">Adventure</option>
+                    <option value="beach">Beach</option>
+                    <option value="city">City Break</option>
+                    <option value="backpacking">Backpacking</option>
+                </select>
+            </div>
+            <div class="grid">
+                <div class="form-group">
+                    <label><i class="fas fa-calendar"></i> Duration (days)</label>
+                    <input type="number" id="tripDuration" min="1" value="3" onchange="generatePackingList()" />
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-cloud-sun"></i> Weather</label>
+                    <select id="weather" onchange="generatePackingList()">
+                        <option value="">Select weather</option>
+                        <option value="hot">Hot</option>
+                        <option value="warm" selected>Warm</option>
+                        <option value="mild">Mild</option>
+                        <option value="cold">Cold</option>
+                        <option value="mixed">Mixed</option>
+                    </select>
+                </div>
+            </div>
+            <div id="packingList"></div>
+        </div>
+
+        <div id="documents" class="tab-content">
+            <h2><i class="fas fa-file-alt"></i> Travel Document Tracker</h2>
+            <button class="btn" onclick="showAddDocumentModal()"><i class="fas fa-plus"></i> Add Document</button>
+            <div class="document-tracker" id="documentList"></div>
+        </div>
+
+        <div id="currency" class="tab-content">
+            <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
+            <div class="currency-converter">
+                <div class="converter-grid">
+                    <div class="form-group">
+                        <label><i class="fas fa-coins"></i> Amount (INR)</label>
+                        <input type="number" id="currencyAmount" value="1000" />
+                    </div>
+                    <div style="text-align: center; margin-top: 25px">
+                        <i class="fas fa-exchange-alt fa-2x" style="color: #667eea"></i>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-globe"></i> To Currency</label>
+                        <select id="toCurrency">
+                            <option value="USD">US Dollar (USD)</option>
+                            <option value="EUR">Euro (EUR)</option>
+                            <option value="GBP">British Pound (GBP)</option>
+                            <option value="JPY">Japanese Yen (JPY)</option>
+                            <option value="AUD">Australian Dollar (AUD)</option>
+                            <option value="CAD">Canadian Dollar (CAD)</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn" onclick="convertCurrency()"><i class="fas fa-exchange-alt"></i> Convert</button>
+
+                <div class="currency-card">
+                    <h4><i class="fas fa-calculator"></i> Conversion Result</h4>
+                    <div id="conversionResult">Enter amount and select currency to convert</div>
+                </div>
+
+                <div class="currency-card">
+                    <h4><i class="fas fa-info-circle"></i> Today's Rates (1 INR)</h4>
+                    <div>USD: $0.012</div>
+                    <div>EUR: €0.011</div>
+                    <div>GBP: £0.0095</div>
+                    <div>JPY: ¥1.70</div>
+                    <div>AUD: A$0.018</div>
+                    <div>CAD: C$0.016</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="emergency" class="tab-content">
+            <h2><i class="fas fa-kit-medical"></i> Emergency Contacts</h2>
+            <p>Quickly find emergency numbers for police, ambulance, and fire services, as well as embassy information for your destination. Always verify these numbers with local authorities.</p>
+            
+            <div class="form-group">
+                <label for="countrySearch"><i class="fas fa-search"></i> Search by Country</label>
+                <input type="text" id="countrySearch" placeholder="e.g., France, Japan, USA" onkeyup="filterEmergencyContacts()">
+            </div>
+
+            <div class="grid" id="emergencyContactsList">
+                <div class="card contact-card" data-country="india">
+                    <h3><i class="fas fa-flag"></i> India 🇮🇳</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Police:</span> <strong>100</strong>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-ambulance"></i>
+                        <span>Ambulance:</span> <strong>108</strong>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-fire-extinguisher"></i>
+                        <span>Fire:</span> <strong>101</strong>
+                    </div>
+                </div>
+
+                <div class="card contact-card" data-country="united-states">
+                    <h3><i class="fas fa-flag"></i> United States 🇺🇸</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-volume"></i>
+                        <span>Emergency Services:</span> <strong>911</strong>
+                    </div>
+                    <div class="disclaimer" style="font-size: 0.9em; margin-top: 5px; color: #888;">*911 connects to Police, Fire, and Ambulance.</div>
+                </div>
+
+                <div class="card contact-card" data-country="united-kingdom">
+                    <h3><i class="fas fa-flag"></i> United Kingdom 🇬🇧</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-volume"></i>
+                        <span>Emergency Services:</span> <strong>999</strong>
+                    </div>
+                    <div class="disclaimer" style="font-size: 0.9em; margin-top: 5px; color: #888;">*999 connects to Police, Fire, and Ambulance.</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px;"><i class="fas fa-passport"></i> Embassy and Consulate Contacts</h3>
+            <p>For citizens traveling abroad, here are key contacts for consular assistance. Contact details may vary by city.</p>
+            <div class="grid">
+                <div class="card">
+                    <h4><i class="fas fa-globe"></i> U.S. Embassy in India</h4>
+                    <p><strong>Website:</strong> <a href="https://in.usembassy.gov" target="_blank">in.usembassy.gov</a></p>
+                    <p><strong>Phone:</strong> +91-11-2419-8000</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fas fa-globe"></i> British High Commission in India</h4>
+                    <p><strong>Website:</strong> <a href="https://www.gov.uk/world/india--high-commission" target="_blank">gov.uk/india</a></p>
+                    <p><strong>Phone:</strong> +91 11 2419 2100</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="gallery" class="tab-content">
+            <h2><i class="fas fa-images"></i> Destination Gallery</h2>
+            <div class="gallery-search">
+                <input type="text" id="searchGalleryInput" placeholder="Search destinations...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="europe">Europe</button>
+                <button class="filter-btn" data-filter="asia">Asia</button>
+                <button class="filter-btn" data-filter="americas">Americas</button>
+                <button class="filter-btn" data-filter="africa">Africa</button>
+                <button class="filter-btn" data-filter="oceania">Oceania</button>
+            </div>
+            <div id="gallery-container" class="gallery-grid">
+                </div>
+        </div>
     </div>
 
-    <!-- ===================== GALLERY TAB ===================== -->
-    <div id="gallery" class="tab-content">
-      <h2><i class="fas fa-images"></i> Destination Gallery</h2>
-      <div class="gallery-search">
-        <input type="text" id="searchGalleryInput" placeholder="Search destinations...">
-        <i class="fas fa-search"></i>
-      </div>
-      <div class="gallery-filter">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="europe">Europe</button>
-        <button class="filter-btn" data-filter="asia">Asia</button>
-        <button class="filter-btn" data-filter="americas">Americas</button>
-        <button class="filter-btn" data-filter="africa">Africa</button>
-        <button class="filter-btn" data-filter="oceania">Oceania</button>
-      </div>
-      <div id="gallery-container" class="gallery-grid">
-        <!-- Gallery cards will be generated by script.js -->
-      </div>
+    <div id="documentModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('documentModal')">&times;</span>
+            <h2>Add a New Document</h2>
+            <div class="form-group">
+                <label for="docType">Document Type</label>
+                <select id="docType">
+                    <option value="passport">Passport</option>
+                    <option value="visa">Visa</option>
+                    <option value="license">Driver's License</option>
+                    <option value="insurance">Travel Insurance</option>
+                    <option value="vaccination">Vaccination Proof</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="docNumber">Document Number</label>
+                <input type="text" id="docNumber" placeholder="e.g., A12345678">
+            </div>
+            <div class="form-group">
+                <label for="docExpiry">Expiry Date</label>
+                <input type="date" id="docExpiry">
+            </div>
+            <button class="btn" onclick="addDocument()">Add Document</button>
+        </div>
     </div>
-  </div>
 
-  <!-- ===================== MODALS ===================== -->
-  <div id="documentModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('documentModal')">&times;</span>
-      <h2>Add a New Document</h2>
-      <div class="form-group">
-        <label for="docType">Document Type</label>
-        <select id="docType">
-          <option value="passport">Passport</option>
-          <option value="visa">Visa</option>
-          <option value="license">Driver's License</option>
-          <option value="insurance">Travel Insurance</option>
-          <option value="vaccination">Vaccination Proof</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="docNumber">Document Number</label>
-        <input type="text" id="docNumber" placeholder="e.g., A12345678">
-      </div>
-      <div class="form-group">
-        <label for="docExpiry">Expiry Date</label>
-        <input type="date" id="docExpiry">
-      </div>
-      <button class="btn" onclick="addDocument()">Add Document</button>
+    <div id="loginModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" id="loginClose">&times;</span>
+            <h2>Login to WanderWise</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required placeholder="Enter your password">
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
     </div>
-  </div>
 
-  <div id="loginModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <span class="close-btn" id="loginClose">&times;</span>
-      <h2>Login to WanderWise</h2>
-      <form id="loginForm">
-        <div class="form-group">
-          <label for="loginEmail">Email</label>
-          <input type="email" id="loginEmail" required placeholder="Enter your email">
+    <div id="signupModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" id="signupClose">&times;</span>
+            <h2>Join WanderWise</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" required placeholder="Choose a username">
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required placeholder="Create a password">
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
         </div>
-        <div class="form-group">
-          <label for="loginPassword">Password</label>
-          <input type="password" id="loginPassword" required placeholder="Enter your password">
-        </div>
-        <button type="submit" class="btn">Login</button>
-      </form>
     </div>
-  </div>
 
-  <div id="signupModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <span class="close-btn" id="signupClose">&times;</span>
-      <h2>Join WanderWise</h2>
-      <form id="signupForm">
-        <div class="form-group">
-          <label for="signupUsername">Username</label>
-          <input type="text" id="signupUsername" required placeholder="Choose a username">
-        </div>
-        <div class="form-group">
-          <label for="signupEmail">Email</label>
-          <input type="email" id="signupEmail" required placeholder="Enter your email">
-        </div>
-        <div class="form-group">
-          <label for="signupPassword">Password</label>
-          <input type="password" id="signupPassword" required placeholder="Create a password">
-        </div>
-        <button type="submit" class="btn">Sign Up</button>
-      </form>
-    </div>
-  </div>
 
-  <!-- ===================== FLOATING ACTION & NOTIFICATION ===================== -->
-  <button class="floating-action" onclick="exportItinerary()"><i class="fas fa-file-download"></i></button>
-  <div id="notification" class="notification">
-    <i class="fas fa-check-circle"></i>
-    <span id="notificationText">Notification message</span>
-  </div>
+    <button class="floating-action" onclick="exportItinerary()"><i class="fas fa-file-download"></i></button>
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">Notification message</span>
+    </div>
 
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-column about">
-        <h3 class="footer-brand">WanderWise</h3>
-        <p>Your journey, your way. Crafting unforgettable travel experiences with a touch of magic and a lot of smarts.
-        </p>
-      </div>
-      <div class="footer-column links">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#itinerary" onclick="handleFooterLinkClick('itinerary')">Itinerary</a></li>
-          <li><a href="#routes" onclick="handleFooterLinkClick('routes')">Smart Routes</a></li>
-          <li><a href="#checklist" onclick="handleFooterLinkClick('checklist')">Checklist</a></li>
-          <li><a href="#packing" onclick="handleFooterLinkClick('packing')">Packing</a></li>
-        </ul>
-      </div>
-      <div class="footer-column contact">
-        <h4>Contact Us</h4>
-        <p><i class="fas fa-envelope"></i> <a href="mailto:hello@wanderwise.com">hello@wanderwise.com</a></p>
-        <p><i class="fas fa-phone"></i> +91 88xxxxxxx0</p>
-        <p><i class="fas fa-map-marker-alt"></i> India</p>
-      </div>
-      <div class="footer-column social">
-        <h4>Follow The Adventure</h4>
-        <div class="footer-social-icons">
-          <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="https://facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://instagram.com/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="mailto:hello@wanderwise.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom-bar">
-      © 2025 WanderWise. Travel smarter, dream bigger.
-    </div>
     <!-- 🔐 Auth Header -->
 <div class="auth-bar">
   <div id="authHello" style="display:none;">
@@ -486,6 +507,54 @@
     </form>
   </div>
 </div>
+
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-column about">
+                <h3 class="footer-brand">WanderWise</h3>
+                <p>Your journey, your way. Crafting unforgettable travel experiences with a touch of magic and a lot of
+                    smarts.
+                </p>
+            </div>
+            <div class="footer-column links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#itinerary" onclick="handleFooterLinkClick('itinerary')">Itinerary</a></li>
+                    <li><a href="#routes" onclick="handleFooterLinkClick('routes')">Smart Routes</a></li>
+                    <li><a href="#checklist" onclick="handleFooterLinkClick('checklist')">Checklist</a></li>
+                    <li><a href="#packing" onclick="handleFooterLinkClick('packing')">Packing</a></li>
+                </ul>
+            </div>
+            <div class="footer-column contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:hello@wanderwise.com">hello@wanderwise.com</a></p>
+                <p><i class="fas fa-phone"></i> +91 88xxxxxxx0</p>
+                <p><i class="fas fa-map-marker-alt"></i> India</p>
+            </div>
+            <div class="footer-column social">
+                <h4>Follow The Adventure</h4>
+                <div class="footer-social-icons">
+                    <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://facebook.com/" target="_blank" aria-label="Facebook"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/" target="_blank" aria-label="Instagram"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="mailto:hello@wanderwise.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            © 2025 WanderWise. Travel smarter, dream bigger.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // This sets the base URL for the authentication backend
+        window.AUTH_API_BASE = "http://localhost:5000";
+    </script>
+    <script src="auth.js"></script>
 </body>
 
 </html>

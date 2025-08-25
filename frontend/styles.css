@@ -1396,3 +1396,56 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+
+/* -------------------- Emergency Page Styles -------------------- */
+
+#emergency h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+
+#emergency p {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 20px;
+  color: var(--text-secondary);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: var(--text-secondary);
+}
+
+.contact-item i {
+  color: var(--accent-primary);
+  min-width: 20px;
+}
+
+.contact-card h3 {
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 10px;
+}
+
+#emergency h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 40px 0 20px;
+  color: var(--accent-primary);
+}

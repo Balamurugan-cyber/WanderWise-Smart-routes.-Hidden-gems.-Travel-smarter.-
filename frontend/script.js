@@ -1,7 +1,7 @@
 // =========================
 //
-//  WanderWise - script.js
-//  Main frontend logic for the travel planner application.
+//  WanderWise - script.js
+//  Main frontend logic for the travel planner application.
 //
 // =========================
 
@@ -238,12 +238,12 @@ function renderChecklist() {
       const id = `${section}-item-${idx}`;
       const checked = localStorage.getItem(id) === "true";
       container.innerHTML += `
-          <label class="checklist-item">
-              <input type="checkbox" id="${id}" ${
+            <label class="checklist-item">
+                <input type="checkbox" id="${id}" ${
         checked ? "checked" : ""
       } onchange="toggleChecklist('${id}')">
-              <span>${item}</span>
-          </label>`;
+                <span>${item}</span>
+            </label>`;
     });
   });
   updateChecklistProgress();
@@ -571,6 +571,85 @@ function exportItinerary() {
 }
 
 // =========================
+// EMERGENCY CONTACTS
+// =========================
+
+const emergencyContacts = [
+  { country: "India", police: "100", ambulance: "102", fire: "101" },
+  { country: "United States", police: "911", ambulance: "911", fire: "911" },
+  { country: "United Kingdom", police: "999", ambulance: "999", fire: "999" },
+  { country: "Australia", police: "000", ambulance: "000", fire: "000" },
+  { country: "France", police: "17", ambulance: "15", fire: "18" },
+  { country: "Germany", police: "110", ambulance: "112", fire: "112" },
+  { country: "Japan", police: "110", ambulance: "119", fire: "119" },
+  { country: "Brazil", police: "190", ambulance: "192", fire: "193" },
+  { country: "Canada", police: "911", ambulance: "911", fire: "911" },
+  { country: "Mexico", police: "911", ambulance: "911", fire: "911" },
+  { country: "New Zealand", police: "111", ambulance: "111", fire: "111" },
+  { country: "China", police: "110", ambulance: "120", fire: "119" },
+  { country: "South Africa", police: "10111", ambulance: "10177", fire: "10177" },
+];
+
+/**
+ * Renders the emergency contact cards and populates the country dropdown.
+ */
+function renderEmergencyContacts() {
+  const contactsGrid = document.getElementById("contactsGrid");
+  const countryDropdown = document.getElementById("countryDropdown");
+
+  if (!contactsGrid || !countryDropdown) return;
+
+  // Clear existing content
+  contactsGrid.innerHTML = "";
+  countryDropdown.innerHTML = `<option value="">All Countries</option>`;
+
+  emergencyContacts.sort((a, b) => a.country.localeCompare(b.country));
+
+  emergencyContacts.forEach((contact) => {
+    // Populate the dropdown
+    const option = document.createElement("option");
+    option.value = contact.country;
+    option.textContent = contact.country;
+    countryDropdown.appendChild(option);
+
+    // Create and append the contact card
+    const card = document.createElement("div");
+    card.className = "contact-card";
+    card.setAttribute("data-country", contact.country);
+    card.innerHTML = `
+      <h3>${contact.country}</h3>
+      <ul>
+        <li><i class="fas fa-user-shield"></i> Police: <a href="tel:${contact.police}">${contact.police}</a></li>
+        <li><i class="fas fa-ambulance"></i> Ambulance: <a href="tel:${contact.ambulance}">${contact.ambulance}</a></li>
+        <li><i class="fas fa-fire-extinguisher"></i> Fire: <a href="tel:${contact.fire}">${contact.fire}</a></li>
+      </ul>
+    `;
+    contactsGrid.appendChild(card);
+  });
+}
+
+/**
+ * Filters emergency contact cards based on search input and dropdown selection.
+ */
+function filterContacts() {
+  const searchInput = document.getElementById("searchInput");
+  const countryDropdown = document.getElementById("countryDropdown");
+  const cards = document.querySelectorAll("#contactsGrid .contact-card");
+
+  if (!searchInput || !countryDropdown || cards.length === 0) return;
+
+  const searchText = searchInput.value.toLowerCase();
+  const selectedCountry = countryDropdown.value.toLowerCase();
+
+  cards.forEach(card => {
+    const countryName = card.getAttribute("data-country").toLowerCase();
+    const isVisible = (searchText === "" || countryName.includes(searchText)) &&
+                      (selectedCountry === "" || countryName === selectedCountry);
+    card.style.display = isVisible ? "block" : "none";
+  });
+}
+
+// =========================
 // APP INITIALIZATION
 // =========================
 document.addEventListener("DOMContentLoaded", function () {
@@ -599,6 +678,7 @@ document.addEventListener("DOMContentLoaded", function () {
   renderChecklist();
   generatePackingList();
   generateGalleryCards();
+  renderEmergencyContacts(); // New: Renders emergency contacts on load
 
   // Gallery Filter & Search Event Listeners
   document.querySelectorAll(".filter-btn").forEach((button) => {
@@ -616,5 +696,15 @@ document.addEventListener("DOMContentLoaded", function () {
     searchInput.addEventListener("input", function () {
       searchGallery(this.value);
     });
+  }
+
+  // Emergency Contacts Filtering Event Listeners
+  const emergencySearchInput = document.getElementById("searchInput");
+  const countryDropdown = document.getElementById("countryDropdown");
+  if (emergencySearchInput) {
+    emergencySearchInput.addEventListener("input", filterContacts);
+  }
+  if (countryDropdown) {
+    countryDropdown.addEventListener("change", filterContacts);
   }
 });
