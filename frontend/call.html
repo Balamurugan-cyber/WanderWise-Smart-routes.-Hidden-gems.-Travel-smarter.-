@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Contacts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f9;
+      color: #333;
+    }
+    header {
+      background: #d00000;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #6a040f;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .emergency-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .search-box {
+      text-align: center;
+      margin: 20px;
+    }
+    .search-box input {
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+      border: 2px solid #d00000;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>🚨 Emergency Contacts</h1>
+    <p>Quickly find emergency numbers for your country</p>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html">🏠 Home</a>
+  </nav>
+
+  <!-- SEARCH BOX -->
+  <div class="search-box">
+    <input type="text" placeholder="🔍 Search by Country (e.g. India, USA, UK)">
+  </div>
+
+  <!-- EMERGENCY CARDS -->
+  <div class="emergency-container">
+    <div class="card">
+      <h2>🇮🇳 India</h2>
+      <p>👮 Police: <b>100</b></p>
+      <p>🚑 Ambulance: <b>108</b></p>
+      <p>🔥 Fire: <b>101</b></p>
+    </div>
+    <div class="card">
+      <h2>🇺🇸 United States</h2>
+      <p>📞 Emergency Services: <b>911</b></p>
+      <p><small>*911 connects to Police, Fire, and Ambulance.</small></p>
+    </div>
+    <div class="card">
+      <h2>🇬🇧 United Kingdom</h2>
+      <p>📞 Emergency Services: <b>999</b></p>
+      <p><small>*999 connects to Police, Fire, and Ambulance.</small></p>
+    </div>
+
+    <div class="card">
+      <h2>🇨🇦 Canada</h2>
+      <p>📞 Emergency Services: <b>911</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇳🇿 New Zealand</h2>
+      <p>📞 Emergency Services: <b>111</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇿🇦 South Africa</h2>
+      <p>👮 Police: <b>10111</b></p>
+      <p>🚑 Ambulance: <b>10177</b></p>
+      <p>🔥 Fire: <b>10177</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇩🇪 Germany</h2>
+      <p>👮 Police: <b>110</b></p>
+      <p>🚑 Fire & Ambulance: <b>112</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇫🇷 France</h2>
+      <p>👮 Police: <b>17</b></p>
+      <p>🚑 Ambulance: <b>15</b></p>
+      <p>🔥 Fire: <b>18</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇪🇸 Spain</h2>
+      <p>📞 Emergency Services: <b>112</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇮🇹 Italy</h2>
+      <p>📞 Emergency Services: <b>112</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇯🇵 Japan</h2>
+      <p>👮 Police: <b>110</b></p>
+      <p>🚑 Ambulance & Fire: <b>119</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇨🇳 China</h2>
+      <p>👮 Police: <b>110</b></p>
+      <p>🚑 Ambulance: <b>120</b></p>
+      <p>🔥 Fire: <b>119</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇸🇬 Singapore</h2>
+      <p>👮 Police: <b>999</b></p>
+      <p>🚑 Ambulance & Fire: <b>995</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇦🇪 UAE (Dubai, Abu Dhabi)</h2>
+      <p>📞 Emergency Services: <b>999</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇸🇦 Saudi Arabia</h2>
+      <p>👮 Police: <b>999</b></p>
+      <p>🚑 Ambulance: <b>997</b></p>
+      <p>🔥 Fire: <b>998</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇧🇷 Brazil</h2>
+      <p>👮 Police: <b>190</b></p>
+      <p>🚑 Ambulance: <b>192</b></p>
+      <p>🔥 Fire: <b>193</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇷🇺 Russia</h2>
+      <p>📞 Emergency Services: <b>112</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇲🇽 Mexico</h2>
+      <p>📞 Emergency Services: <b>911</b></p>
+    </div>
+
+    <div class="card">
+      <h2>🇳🇵 Nepal</h2>
+      <p>👮 Police: <b>100</b></p>
+      <p>🚑 Ambulance: <b>102</b></p>
+      <p>🔥 Fire: <b>101</b></p>
+    </div>
+
+    
+
+  </div>
+
+  <!-- SEARCH SCRIPT -->
+  <script>
+    const searchBox = document.querySelector(".search-box input");
+    const cards = document.querySelectorAll(".emergency-container .card");
+
+    searchBox.addEventListener("input", () => {
+      let query = searchBox.value.toLowerCase();
+      cards.forEach(card => {
+        card.style.display = card.innerText.toLowerCase().includes(query) ? "block" : "none";
+      });
+    });
+  </script>
+
+</body>
+</html>
