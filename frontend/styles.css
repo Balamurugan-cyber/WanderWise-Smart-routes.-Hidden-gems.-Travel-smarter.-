@@ -1032,17 +1032,17 @@ body {
     justify-content: center;
   }
 }
-
+/* fix back to top  */
 #backToTop {
   position: fixed;
-  bottom: 120px; /* higher above the footer */
+  bottom: 120px; 
   right: 30px;
   z-index: 1200;
   background: linear-gradient(
     135deg,
     #4361ee,
     #7f53ac
-  ); /* blue-purple gradient */
+  );
   color: #fff;
   border: none;
   border-radius: 50%;
