@@ -104,6 +104,11 @@ function switchTab(tabName, clickedElement) {
   if (tabName === "gallery") {
     generateGalleryCards();
   }
+  
+  // Learn user preferences for AI personality
+  if (window.AIPersonality) {
+    AIPersonality.learnFromActivity({ name: tabName, type: 'navigation' });
+  }
 }
 
 /**
@@ -650,6 +655,216 @@ function filterContacts() {
 }
 
 // =========================
+// ENHANCED FEATURES INTEGRATION
+// =========================
+
+// AI Itinerary Optimization
+async function optimizeItinerary() {
+  if (activities.length === 0) {
+    showNotification('Add activities first to optimize');
+    return;
+  }
+  
+  const results = await SmartOptimizer.optimizeRoute(activities);
+  const resultsDiv = document.getElementById('optimizationResults');
+  const contentDiv = document.getElementById('optimizationContent');
+  
+  contentDiv.innerHTML = `
+    <div class="optimization-stats">
+      <div class="stat-item"><i class="fas fa-clock"></i> Time Saved: ${results.timeSaved} minutes</div>
+      <div class="stat-item"><i class="fas fa-rupee-sign"></i> Money Saved: ₹${results.moneySaved}</div>
+      <div class="stat-item"><i class="fas fa-cloud-sun"></i> Weather Score: ${results.weatherScore}%</div>
+      <div class="stat-item"><i class="fas fa-car"></i> Traffic Score: ${results.trafficScore}%</div>
+    </div>
+  `;
+  
+  resultsDiv.style.display = 'block';
+  activities = results.optimizedActivities;
+  renderItineraryList();
+  showNotification('Itinerary optimized successfully!');
+}
+
+// Hidden Gems Discovery
+function discoverGems() {
+  const location = document.getElementById('gemsLocation').value;
+  if (!location) {
+    showNotification('Please enter a location');
+    return;
+  }
+  
+  const gems = HiddenGemsDiscovery.getLocalGems(location);
+  const gemsList = document.getElementById('hiddenGemsList');
+  
+  if (gems.length === 0) {
+    gemsList.innerHTML = '<p>No hidden gems found for this location. Be the first to share one!</p>';
+    return;
+  }
+  
+  gemsList.innerHTML = gems.map(gem => `
+    <div class="gem-card">
+      <h4><i class="fas fa-gem"></i> ${gem.name}</h4>
+      <p><i class="fas fa-map-marker-alt"></i> ${gem.location}</p>
+      <p>${gem.description}</p>
+      <div class="gem-rating"><i class="fas fa-star"></i> ${gem.rating}/5</div>
+      <div class="gem-tips"><i class="fas fa-lightbulb"></i> ${gem.tips}</div>
+    </div>
+  `).join('');
+}
+
+function addHiddenGem() {
+  const name = document.getElementById('newGemName').value;
+  const location = document.getElementById('newGemLocation').value;
+  const description = document.getElementById('newGemDescription').value;
+  
+  if (!name || !location || !description) {
+    showNotification('Please fill all fields');
+    return;
+  }
+  
+  HiddenGemsDiscovery.addUserGem({ name, location, description, type: 'user-submitted' });
+  showNotification('Hidden gem shared successfully!');
+  
+  // Clear form
+  document.getElementById('newGemName').value = '';
+  document.getElementById('newGemLocation').value = '';
+  document.getElementById('newGemDescription').value = '';
+}
+
+// Multi-Modal Route Planning
+async function findMultiModalRoute() {
+  const from = document.getElementById('fromLocation').value;
+  const to = document.getElementById('toLocation').value;
+  
+  if (!from || !to) {
+    showNotification('Please enter both locations');
+    return;
+  }
+  
+  const journey = await MultiModalPlanner.planJourney(from, to);
+  const resultsDiv = document.getElementById('multiModalResults');
+  
+  resultsDiv.innerHTML = `
+    <div class="journey-options">
+      <h4><i class="fas fa-route"></i> Travel Options from ${from} to ${to}</h4>
+      ${journey.options.map(option => `
+        <div class="transport-option">
+          <div class="option-header">
+            <i class="fas fa-${option.mode === 'flight' ? 'plane' : option.mode === 'train' ? 'train' : option.mode === 'bus' ? 'bus' : 'car'}"></i>
+            <span>${option.mode.toUpperCase()}</span>
+            <span class="option-cost">₹${option.cost}</span>
+          </div>
+          <div class="option-details">
+            <span><i class="fas fa-clock"></i> ${option.duration}</span>
+            <span><i class="fas fa-leaf"></i> ${option.co2}kg CO₂</span>
+            <span><i class="fas fa-star"></i> ${option.comfort} comfort</span>
+          </div>
+        </div>
+      `).join('')}
+      <div class="recommendation">
+        <i class="fas fa-thumbs-up"></i> Recommended: ${journey.recommended.mode.toUpperCase()} 
+        (Saves ${journey.carbonSavings}kg CO₂)
+      </div>
+    </div>
+  `;
+}
+
+// Travel Analytics
+function getAnalytics() {
+  const destination = document.getElementById('analyticsDestination').value;
+  if (!destination) {
+    showNotification('Please enter a destination');
+    return;
+  }
+  
+  const bestTime = TravelAnalytics.getBestTimeToVisit(destination);
+  const priceTrends = TravelAnalytics.getPriceTrends(destination);
+  const resultsDiv = document.getElementById('analyticsResults');
+  
+  resultsDiv.innerHTML = `
+    <div class="analytics-grid">
+      <div class="analytics-card">
+        <h4><i class="fas fa-calendar-check"></i> Best Time to Visit</h4>
+        <p><strong>Months:</strong> ${bestTime.bestMonths.join(', ')}</p>
+        <p><strong>Crowd Level:</strong> ${bestTime.crowdLevel}</p>
+        <p><strong>Price Level:</strong> ${bestTime.priceLevel}</p>
+      </div>
+      <div class="analytics-card">
+        <h4><i class="fas fa-chart-line"></i> Price Trends</h4>
+        <p><strong>Current Trend:</strong> ${priceTrends.currentTrend}</p>
+        <p><strong>Change:</strong> ${priceTrends.percentChange > 0 ? '+' : ''}${priceTrends.percentChange}%</p>
+        <p><strong>Best Booking:</strong> ${priceTrends.bestBookingTime} days ahead</p>
+        <p><strong>Prediction:</strong> ${priceTrends.prediction}</p>
+      </div>
+    </div>
+  `;
+}
+
+// Offline Functionality
+async function downloadGuide() {
+  const city = document.getElementById('offlineCity').value;
+  if (!city) {
+    showNotification('Please enter a city name');
+    return;
+  }
+  
+  const guide = await OfflineManager.downloadCityGuide(city);
+  const guidesDiv = document.getElementById('offlineGuides');
+  
+  guidesDiv.innerHTML += `
+    <div class="offline-guide">
+      <h4><i class="fas fa-map"></i> ${guide.city} Guide</h4>
+      <p><i class="fas fa-download"></i> Downloaded: ${new Date(guide.lastUpdated).toLocaleDateString()}</p>
+      <p><i class="fas fa-gem"></i> ${guide.attractions.length} hidden gems included</p>
+      <p><i class="fas fa-phone"></i> Emergency contacts included</p>
+    </div>
+  `;
+  
+  showNotification(`${city} guide downloaded for offline use!`);
+}
+
+// Smart Notifications
+async function checkWeatherAlerts() {
+  const destination = document.getElementById('weatherDestination').value;
+  if (!destination) {
+    showNotification('Please enter a destination');
+    return;
+  }
+  
+  const alerts = await SmartNotifications.checkWeatherAlerts(destination);
+  const alertsDiv = document.getElementById('weatherAlerts');
+  
+  if (alerts.length === 0) {
+    alertsDiv.innerHTML = '<p><i class="fas fa-check"></i> No weather alerts for your destination</p>';
+  } else {
+    alertsDiv.innerHTML = alerts.map(alert => `
+      <div class="alert alert-${alert.priority}">
+        <i class="fas fa-exclamation-triangle"></i> ${alert.message}
+      </div>
+    `).join('');
+  }
+}
+
+function checkFlightStatus() {
+  const flightNumber = document.getElementById('flightNumber').value;
+  if (!flightNumber) {
+    showNotification('Please enter a flight number');
+    return;
+  }
+  
+  const status = SmartNotifications.checkFlightAlerts(flightNumber);
+  const statusDiv = document.getElementById('flightStatus');
+  
+  statusDiv.innerHTML = `
+    <div class="flight-info">
+      <h4><i class="fas fa-plane"></i> ${status.flightNumber}</h4>
+      <p><strong>Status:</strong> ${status.status}</p>
+      <p><strong>Gate:</strong> ${status.gate}</p>
+      <p><strong>Boarding:</strong> ${status.boarding}</p>
+    </div>
+  `;
+}
+
+// =========================
 // APP INITIALIZATION
 // =========================
 document.addEventListener("DOMContentLoaded", function () {
@@ -708,3 +923,4 @@ document.addEventListener("DOMContentLoaded", function () {
     countryDropdown.addEventListener("change", filterContacts);
   }
 });
+

@@ -10,6 +10,8 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&family=Pacifico&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="enhanced-styles.css" />
+    <link rel="stylesheet" href="chatbot-styles.css" />
 </head>
 
 <body>
@@ -30,6 +32,10 @@
                     class="fas fa-kit-medical"></i>Emergency</a>
             <a href="#currency" class="nav-link" onclick="switchTab('currency', this)"><i
                     class="fas fa-money-bill-wave"></i>Currency</a>
+            <a href="#hiddenGems" class="nav-link" onclick="switchTab('hiddenGems', this)"><i class="fas fa-gem"></i>Hidden Gems</a>
+            <a href="#analytics" class="nav-link" onclick="switchTab('analytics', this)"><i class="fas fa-chart-line"></i>Analytics</a>
+            <a href="#offline" class="nav-link" onclick="switchTab('offline', this)"><i class="fas fa-download"></i>Offline</a>
+            <a href="#notifications" class="nav-link" onclick="switchTab('notifications', this)"><i class="fas fa-bell"></i>Alerts</a>
             <a href="#gallery" class="nav-link" onclick="switchTab('gallery', this)"><i class="fas fa-images"></i>Gallery</a>
         </div>
         <div class="nav-right">
@@ -108,6 +114,13 @@
                 <button class="btn" onclick="addItineraryItem()" style="margin-top: 10px"><i
                         class="fas fa-plus"></i>Add
                     Activity</button>
+                <button class="btn btn-secondary" onclick="optimizeItinerary()" style="margin-top: 10px; margin-left: 10px"><i
+                        class="fas fa-magic"></i>AI Optimize</button>
+            </div>
+            
+            <div class="card" style="margin-top: 20px; display: none;" id="optimizationResults">
+                <h4><i class="fas fa-brain"></i> AI Optimization Results</h4>
+                <div id="optimizationContent"></div>
             </div>
             <div id="itineraryList"></div>
         </div>
@@ -125,7 +138,9 @@
                 </div>
             </div>
             <button class="btn" onclick="findRoute()"><i class="fas fa-search"></i> Find Best Route</button>
+            <button class="btn btn-secondary" onclick="findMultiModalRoute()" style="margin-left: 10px"><i class="fas fa-route"></i> Multi-Modal Options</button>
             <div id="routeResults" style="margin-top: 20px;"></div>
+            <div id="multiModalResults" style="margin-top: 20px;"></div>
         </div>
 
         <div id="checklist" class="tab-content">
@@ -297,6 +312,62 @@
 
         </div>
 
+        <div id="hiddenGems" class="tab-content">
+            <h2><i class="fas fa-gem"></i> Hidden Gems Discovery</h2>
+            <div class="form-group">
+                <label><i class="fas fa-search"></i> Search Location</label>
+                <input type="text" id="gemsLocation" placeholder="Enter city or region" />
+                <button class="btn" onclick="discoverGems()" style="margin-top: 10px"><i class="fas fa-search"></i> Discover Gems</button>
+            </div>
+            <div id="hiddenGemsList"></div>
+            
+            <div class="card" style="margin-top: 30px;">
+                <h3><i class="fas fa-plus"></i> Share Your Hidden Gem</h3>
+                <input type="text" id="newGemName" placeholder="Gem name" style="margin-bottom: 10px;" />
+                <input type="text" id="newGemLocation" placeholder="Location" style="margin-bottom: 10px;" />
+                <textarea id="newGemDescription" placeholder="Description and tips" style="margin-bottom: 10px;"></textarea>
+                <button class="btn" onclick="addHiddenGem()"><i class="fas fa-share"></i> Share Gem</button>
+            </div>
+        </div>
+
+        <div id="analytics" class="tab-content">
+            <h2><i class="fas fa-chart-line"></i> Travel Analytics</h2>
+            <div class="form-group">
+                <label><i class="fas fa-map-marker-alt"></i> Destination</label>
+                <input type="text" id="analyticsDestination" placeholder="Enter destination" />
+                <button class="btn" onclick="getAnalytics()" style="margin-top: 10px"><i class="fas fa-analytics"></i> Get Insights</button>
+            </div>
+            <div id="analyticsResults"></div>
+        </div>
+
+        <div id="offline" class="tab-content">
+            <h2><i class="fas fa-download"></i> Offline Guides</h2>
+            <div class="form-group">
+                <label><i class="fas fa-city"></i> City</label>
+                <input type="text" id="offlineCity" placeholder="Enter city name" />
+                <button class="btn" onclick="downloadGuide()" style="margin-top: 10px"><i class="fas fa-download"></i> Download Guide</button>
+            </div>
+            <div id="offlineGuides"></div>
+        </div>
+
+        <div id="notifications" class="tab-content">
+            <h2><i class="fas fa-bell"></i> Smart Notifications</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fas fa-cloud-rain"></i> Weather Alerts</h3>
+                    <input type="text" id="weatherDestination" placeholder="Destination" />
+                    <button class="btn" onclick="checkWeatherAlerts()" style="margin-top: 10px">Check Weather</button>
+                    <div id="weatherAlerts"></div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-plane"></i> Flight Status</h3>
+                    <input type="text" id="flightNumber" placeholder="Flight number" />
+                    <button class="btn" onclick="checkFlightStatus()" style="margin-top: 10px">Check Status</button>
+                    <div id="flightStatus"></div>
+                </div>
+            </div>
+        </div>
+
         <div id="gallery" class="tab-content">
             <h2><i class="fas fa-images"></i> Destination Gallery</h2>
             <div class="gallery-search">
@@ -430,6 +501,8 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="enhanced-features.js"></script>
+    <script src="chatbot.js"></script>
     <script>
         // This sets the base URL for the authentication backend
         window.AUTH_API_BASE = "http://localhost:5000";
@@ -438,3 +511,4 @@
 </body>
 
 </html>
+
