@@ -404,10 +404,36 @@
         }
 
         .checklist-item {
+            position:relative;
             display: flex;
-            align-items: center;
-            padding: 10px 0;
+            align-items: flex-start;
+            padding: 15px;
             border-bottom: 1px solid var(--bg-tertiary);
+        }
+
+        #checklist-task{
+            padding:10px;
+        }
+
+        /* Delete Task Button */
+        .delete-btn {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 20px;
+            color: #999;
+            transition: color 0.2s;
+        }
+        
+        .checklist-item:hover .delete-btn {
+            display: block; 
+        }
+        
+        .delete-btn:hover {
+            color:#3a0ca3; 
         }
 
         .checklist-item:last-child {
@@ -415,7 +441,9 @@
         }
 
         .checklist-item input[type="checkbox"] {
+            margin-top: 12px;
             margin-right: 12px;
+            margin-bottom: 5px;
             width: 18px;
             height: 18px;
             cursor: pointer;
